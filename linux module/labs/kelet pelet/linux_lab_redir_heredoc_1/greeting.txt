@@ -1,0 +1,8 @@
+  Dear Team,
+
+  This message was created using a heredoc.
+  It spans multiple lines without needing a text editor.
+
+  Regards,
+  The Linux Lab
+  EOF

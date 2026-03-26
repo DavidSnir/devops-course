@@ -1,0 +1,5 @@
+EVENT 1: Script started at Wed Mar  4 18:53:15 IST 2026
+EVENT 2: User is davidsnir
+EVENT 3: Running on host Davids-MacBook-Air.local
+EVENT 4: Current directory is /Users/davidsnir/devops-course/labs/kelet pelet/linux_lab_redir_output_overwrite_2
+EVENT 5: Script finished at Wed Mar  4 18:53:15 IST 2026

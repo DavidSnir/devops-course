@@ -1,0 +1,3 @@
+darkmode:on
+brighness:50
+resolution:4k

@@ -1,0 +1,6 @@
+=== Server Check Log ===
+11:25:32 Checking web01 ... OK
+11:25:32 Checking web02 ... OK
+11:25:32 Checking web03 ... OK
+11:25:32 Checking db01 ... OK
+11:25:32 Checking db02 ... OK

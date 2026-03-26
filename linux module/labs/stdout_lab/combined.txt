@@ -1,0 +1,14 @@
+cat: ghost.txt: No such file or directory
+/Users/davidsnir/devops-course/labs/stdout_lab
+file1.txt
+file2.txt
+file3.txt
+list.txt
+/Users/davidsnir/devops-course/labs/stdout_lab
+cat: ghost.txt: No such file or directory
+/Users/davidsnir/devops-course/labs/stdout_lab
+file1.txt
+file2.txt
+file3.txt
+list.txt
+/Users/davidsnir/devops-course/labs/stdout_lab

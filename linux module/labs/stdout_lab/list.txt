@@ -1,0 +1,6 @@
+/Users/davidsnir/devops-course/labs/stdout_lab
+file1.txt
+file2.txt
+file3.txt
+list.txt
+/Users/davidsnir/devops-course/labs/stdout_lab

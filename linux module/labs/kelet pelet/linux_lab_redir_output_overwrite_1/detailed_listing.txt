@@ -1,0 +1,11 @@
+total 32
+drwxr-xr-x@ 10 davidsnir  staff   320 Mar  4 17:58 .
+drwxr-xr-x@  3 davidsnir  staff    96 Mar  4 17:56 ..
+drwxr-xr-x@  3 davidsnir  staff    96 Mar  3 17:20 .answers
+-rw-r--r--@  1 davidsnir  staff  3050 Mar  4 14:45 README.md
+drwxr-xr-x@  5 davidsnir  staff   160 Mar  3 17:16 clues
+drwxr-xr-x@  4 davidsnir  staff   128 Mar  3 17:19 data
+-rw-r--r--@  1 davidsnir  staff     0 Mar  4 17:58 detailed_listing.txt
+-rw-r--r--@  1 davidsnir  staff    13 Mar  4 17:56 hello.txt
+-rw-r--r--@  1 davidsnir  staff    58 Mar  4 17:57 listing.txt
+-rw-r--r--@  1 davidsnir  staff  2792 Mar  3 17:16 start_here.txt
