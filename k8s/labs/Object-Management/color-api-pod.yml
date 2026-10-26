@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: color-api
+  name: color-api
+spec:
+  containers:
+  - image: betapenguin/demoapp-color
+    name: color-api
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

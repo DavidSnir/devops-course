@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: movie-backend
+  namespace: dev
+  labels:
+    app: movie-api
+    environment: local
+    tier: backend
+spec:
+  containers:
+    - name: movie-backend
+      image: davidsnir/movie-api:v2.1
+      ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: movie-frontend
+  labels:
+    app: movie-api
+    environment: local
+    tier: frontend
+spec:
+  containers:
+    - name: movie-frontend
+      image: nginx:1.27.0
+      ports:
+        - containerPort: 80

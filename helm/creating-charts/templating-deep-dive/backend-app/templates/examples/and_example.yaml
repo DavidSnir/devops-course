@@ -1,0 +1,17 @@
+# Both values must be true.
+# serviceAccountReady: {{/* and .Values.serviceAccount.create .Values.serviceAccount.aouyomount */}}
+
+# The block runs onlty when both conditions are true.
+{{- if and .Values.ingress.enabled .Values.ingress.hosts }}
+# ingressReady: true
+{{- else }}
+# ingressReady: false
+{{- end }}
+
+{{- if or .Values.ingress.enabled .Values.ingress.hosts}}
+# This one is TRUE
+{{- else }}
+# This one is False
+{{- end }}
+#You can combine "and" with other operators.
+# is ClusterIpService: {{ and (eq .Values.service.type "ClusterIp") .Values.service.port}}

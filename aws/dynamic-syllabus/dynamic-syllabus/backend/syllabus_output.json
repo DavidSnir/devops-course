@@ -1,0 +1,263 @@
+{
+  "_id": "6a022b5ba314b2a1b24d4e86",
+  "syllabus": [
+    {
+      "module_name": "Introduction to Computers & Operating Systems",
+      "description": "Basic computing concepts, introduction to work environments, cloud, and the essence of the DevOps world.",
+      "start_date": "2026-02-22T00:00:00",
+      "end_date": "2026-02-25T00:00:00",
+      "instructor": "TBD",
+      "location": "IITC",
+      "sub_modules": [
+        {
+          "name": "Computing Fundamentals",
+          "description": "Core computing concepts and environment introduction."
+        },
+        {
+          "name": "DevOps & Cloud Intro",
+          "description": "Understanding the DevOps role and cloud computing basics."
+        }
+      ]
+    },
+    {
+      "module_name": "Linux / Bash / CLI",
+      "description": "Shell mastery, process and file management, permissions, and advanced script writing.",
+      "start_date": "2026-02-26T00:00:00",
+      "end_date": "2026-03-11T00:00:00",
+      "instructor": "TBD",
+      "location": "IITC",
+      "sub_modules": [
+        {
+          "name": "CLI & Shell Control",
+          "description": "Navigating the Linux environment and process management."
+        },
+        {
+          "name": "Bash Scripting",
+          "description": "Automating tasks through shell scripts and handling permissions."
+        }
+      ]
+    },
+    {
+      "module_name": "Networking Foundations + HTTP + Basic Security",
+      "description": "OSI model, TCP/IP, DNS, NAT, addressing, traffic analysis tools, and basic information security.",
+      "start_date": "2026-03-12T00:00:00",
+      "end_date": "2026-03-22T00:00:00",
+      "instructor": "TBD",
+      "location": "IITC",
+      "sub_modules": [
+        {
+          "name": "Network Protocols",
+          "description": "In-depth study of TCP/IP, DNS, and NAT protocols."
+        },
+        {
+          "name": "Network Analysis & Security",
+          "description": "Using analysis tools and understanding routing tables."
+        }
+      ]
+    },
+    {
+      "module_name": "Python - Basic and Advanced Programming",
+      "description": "Programming fundamentals, functions, classes, data structures, and file handling.",
+      "start_date": "2026-03-23T00:00:00",
+      "end_date": "2026-04-05T00:00:00",
+      "instructor": "TBD",
+      "location": "IITC",
+      "sub_modules": [
+        {
+          "name": "Python Logic",
+          "description": "Mastering functions, loops, and data structures."
+        },
+        {
+          "name": "Object-Oriented Python",
+          "description": "Advanced programming using classes and modular design."
+        }
+      ]
+    },
+    {
+      "module_name": "Git & GitHub",
+      "description": "Version control, branching, merging, and best practices for collaborative development.",
+      "start_date": "2026-04-06T00:00:00",
+      "end_date": "2026-04-08T00:00:00",
+      "instructor": "TBD",
+      "location": "IITC",
+      "sub_modules": [
+        {
+          "name": "Git Fundamentals",
+          "description": "Repository management, branching, and merging logic."
+        }
+      ]
+    },
+    {
+      "module_name": "Flask API + Python for Automation",
+      "description": "Writing automation scripts, building simple services in Flask, and working with JSON and curl.",
+      "start_date": "2026-04-09T00:00:00",
+      "end_date": "2026-04-19T00:00:00",
+      "instructor": "TBD",
+      "location": "IITC",
+      "sub_modules": [
+        {
+          "name": "API Development",
+          "description": "Creating web services using Flask and JSON."
+        }
+      ]
+    },
+    {
+      "module_name": "AWS Foundations & Cloud Practitioner",
+      "description": "Core AWS services: EC2, VPC, S3, IAM, Route53, and CloudWatch. Preparation for CLF-C02 exam.",
+      "start_date": "2026-04-20T00:00:00",
+      "end_date": "2026-05-03T00:00:00",
+      "instructor": "TBD",
+      "location": "IITC",
+      "sub_modules": [
+        {
+          "name": "Cloud Infrastructure",
+          "description": "Deep dive into AWS compute, storage, and networking."
+        }
+      ]
+    },
+    {
+      "module_name": "Intro to CI/CD + GitHub Actions",
+      "description": "Understanding CI/CD pipelines and initial execution with GitHub Actions.",
+      "start_date": "2026-05-04T00:00:00",
+      "end_date": "2026-05-13T00:00:00",
+      "instructor": "TBD",
+      "location": "IITC",
+      "sub_modules": [
+        {
+          "name": "Pipeline Automation",
+          "description": "Building automated integration and delivery flows."
+        }
+      ]
+    },
+    {
+      "module_name": "Docker & Docker Compose",
+      "description": "Containerizing services, building images, volumes, and multi-container orchestration.",
+      "start_date": "2026-05-14T00:00:00",
+      "end_date": "2026-05-20T00:00:00",
+      "instructor": "TBD",
+      "location": "IITC",
+      "sub_modules": [
+        {
+          "name": "Image & Container Management",
+          "description": "Creating Dockerfiles and managing service exposure."
+        }
+      ]
+    },
+    {
+      "module_name": "Kubernetes & Helm",
+      "description": "Managing Deployments, Services, ConfigMaps, Secrets, and automating with Helm.",
+      "start_date": "2026-05-21T00:00:00",
+      "end_date": "2026-06-03T00:00:00",
+      "instructor": "TBD",
+      "location": "IITC",
+      "sub_modules": [
+        {
+          "name": "K8s Orchestration",
+          "description": "Operating production-grade Kubernetes workloads."
+        },
+        {
+          "name": "Helm Charts",
+          "description": "Template-based application management in K8s."
+        }
+      ]
+    },
+    {
+      "module_name": "Advanced AWS - EKS, ECS, DevSecOps",
+      "description": "Managed Kubernetes, permission management, secrets, and ECR.",
+      "start_date": "2026-06-04T00:00:00",
+      "end_date": "2026-06-15T00:00:00",
+      "instructor": "TBD",
+      "location": "IITC",
+      "sub_modules": [
+        {
+          "name": "Managed Container Services",
+          "description": "Configuring EKS and ECS for high availability."
+        }
+      ]
+    },
+    {
+      "module_name": "Infrastructure as Code - Terraform",
+      "description": "Writing IaC with modules, state management, and workspaces.",
+      "start_date": "2026-06-17T00:00:00",
+      "end_date": "2026-06-22T00:00:00",
+      "instructor": "TBD",
+      "location": "IITC",
+      "sub_modules": [
+        {
+          "name": "Terraform Core",
+          "description": "Declarative infrastructure provisioning."
+        }
+      ]
+    },
+    {
+      "module_name": "Configuration Management - Ansible",
+      "description": "Automated server management using Playbooks, Inventories, and Roles.",
+      "start_date": "2026-06-24T00:00:00",
+      "end_date": "2026-06-29T00:00:00",
+      "instructor": "TBD",
+      "location": "IITC",
+      "sub_modules": [
+        {
+          "name": "Ansible Playbooks",
+          "description": "Agentless automation for server configuration."
+        }
+      ]
+    },
+    {
+      "module_name": "Monitoring & Observability",
+      "description": "Deploying dashboards and alerts with Prometheus, Grafana, and Loki/ELK.",
+      "start_date": "2026-07-01T00:00:00",
+      "end_date": "2026-07-06T00:00:00",
+      "instructor": "TBD",
+      "location": "IITC",
+      "sub_modules": [
+        {
+          "name": "Metrics & Dashboards",
+          "description": "Building visibility into system health."
+        }
+      ]
+    },
+    {
+      "module_name": "Jenkins",
+      "description": "Building complex pipelines and integrating testing with Docker and Git.",
+      "start_date": "2026-07-08T00:00:00",
+      "end_date": "2026-07-13T00:00:00",
+      "instructor": "TBD",
+      "location": "IITC",
+      "sub_modules": [
+        {
+          "name": "Jenkins Pipelines",
+          "description": "Advanced CI/CD workflow orchestration."
+        }
+      ]
+    },
+    {
+      "module_name": "GitOps - ArgoCD",
+      "description": "Configuration management and Git-based deployments for Kubernetes.",
+      "start_date": "2026-07-15T00:00:00",
+      "end_date": "2026-07-20T00:00:00",
+      "instructor": "TBD",
+      "location": "IITC",
+      "sub_modules": [
+        {
+          "name": "Declarative K8s Deployments",
+          "description": "Syncing infrastructure with Git via ArgoCD."
+        }
+      ]
+    },
+    {
+      "module_name": "Final Group Project (Production-like)",
+      "description": "Simulated real-world environment integrating applications, cloud, containers, and CI/CD.",
+      "start_date": "2026-07-22T00:00:00",
+      "end_date": "2026-08-05T00:00:00",
+      "instructor": "TBD",
+      "location": "IITC",
+      "sub_modules": [
+        {
+          "name": "System Integration",
+          "description": "Building a full-stack automated DevOps environment."
+        }
+      ]
+    }
+  ]
+}

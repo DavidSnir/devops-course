@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: movie-api-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: movie-api
+      environment: local
+      tier: backend
+
+    matchExpressions:
+      # Active example:
+      - key: managed
+        operator: Exists
+
+      # ============================
+      # Additional examples (commented)
+      # ============================
+
+      # Example using NotIn:
+      # - key: release
+      #   operator: NotIn
+      #   values:
+      #     - canary
+
+      # Example using In:
+      # - key: tier
+      #   operator: In
+      #   values:
+      #     - backend
+      #     - cache
+
+      # Example using DoesNotExist:
+      # - key: deprecated
+      #   operator: DoesNotExist
+
+  template:
+    metadata:
+      labels:
+        app: movie-api
+        environment: local
+        tier: backend
+        managed: deployment   # Required for the Exists operator to match
+    spec:
+      containers:
+        - name: movie-backend
+          image: davidsnir/movie-api:v2.1
+          ports:
+            - containerPort: 3000

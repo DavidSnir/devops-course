@@ -1,0 +1,387 @@
+# Values for the sports-store parent chart. Secrets are synchronized from AWS
+# Secrets Manager by templates/external-secret.yaml and never belong here.
+# Environment-specific resource settings belong in separate values files.
+
+imagePullPolicy: IfNotPresent
+
+monitoring:
+  prometheusRelease: prometheus-stack
+
+# An Argo CD child Application can select one workload while retaining this
+# chart as the repository's single deployment contract. An empty list renders
+# no first-party Deployments or Services. Defaults preserve the full-chart
+# local development experience.
+enabledServices:
+  - frontend
+  - gateway
+  - auth
+  - catalog
+  - cart
+  - order
+  - payment
+
+ingressServices:
+  - frontend
+  - auth
+  - catalog
+  - cart
+  - order
+  - payment
+
+platform:
+  externalSecret: true
+  mongodbInit: true
+  canaryAnalysis: true
+  # Controls whether this Helm release creates the AnalysisTemplate object.
+  # Set to false on releases that reference the template but should not own it
+  # (e.g. production-order-service, to avoid Helm resource-ownership conflicts
+  # with production-catalog-service which owns the shared template).
+  createAnalysisTemplate: true
+
+containerSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 10001
+  allowPrivilegeEscalation: false
+
+ingress:
+  enabled: true
+  className: nginx
+
+# Prometheus scraping (DEP-263, Sub-PRD 7 2.1.2). The ServiceMonitor selects
+# every Service labeled app.kubernetes.io/part-of: sports-store and scrapes the
+# port named `http-metrics`; only backend services with `metrics: true` expose
+# that named port, so frontend/gateway are skipped automatically.
+monitoring:
+  serviceMonitor:
+    # Off by default so the chart does not require the Prometheus Operator CRDs
+    # in non-EKS environments; values-eks.yaml turns it on.
+    enabled: false
+    interval: 15s
+    path: /metrics
+    # kube-prometheus-stack's Prometheus only discovers ServiceMonitors carrying
+    # its Helm release label (serviceMonitorSelectorNilUsesHelmValues=true by
+    # default). This matches the release name set in apps/monitoring/.
+    releaseLabel: prometheus-stack
+
+mongodb:
+  enabled: true
+  architecture: replicaset
+  replicaSetName: rs0
+  replicaCount: 3
+  image:
+    repository: bitnamilegacy/mongodb
+  auth:
+    enabled: true
+    # The ExternalSecret synchronizes both keys from AWS Secrets Manager.
+    existingSecret: sports-store-app-secrets
+  arbiter:
+    enabled: false
+  # Prefer different workers and zones without blocking small dev clusters.
+  podAntiAffinityPreset: soft
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: topology.kubernetes.io/zone
+      whenUnsatisfiable: ScheduleAnyway
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/instance: "{{ .Release.Name }}"
+          app.kubernetes.io/component: mongodb
+  pdb:
+    create: true
+    minAvailable: 2
+  persistence:
+    enabled: true
+    storageClass: standard
+    accessModes:
+      - ReadWriteOnce
+    size: 8Gi
+  persistentVolumeClaimRetentionPolicy:
+    enabled: true
+    whenScaled: Retain
+    whenDeleted: Retain
+  extraVolumes:
+    - name: init-mongo-script
+      configMap:
+        name: mongodb-init-script
+  extraVolumeMounts:
+    - name: init-mongo-script
+      mountPath: /docker-entrypoint-initdb.d/init-mongo.js
+      subPath: init-mongo.js
+      readOnly: true
+  resources:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+services:
+  frontend:
+    enabled: true
+    image: sports-store-frontend
+    tag: v1.0.0
+    port: 80
+    replicas: 1
+    healthPath: /health
+    ingressPath: /
+    env: []
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi
+      limits:
+        cpu: 150m
+        memory: 128Mi
+    # Off by default: local/kind clusters have no metrics-server, so the HPA
+    # would sit stuck with an "unknown" current metric. values-eks.yaml turns
+    # it on where the metrics-server addon is provisioned.
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 3
+      targetCPUUtilizationPercentage: 75
+
+  gateway:
+    enabled: true
+    image: sports-store-gateway
+    tag: v1.0.0
+    port: 80
+    replicas: 1
+    healthPath: /health
+    env: []
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi
+      limits:
+        cpu: 150m
+        memory: 128Mi
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 3
+      targetCPUUtilizationPercentage: 75
+
+  auth:
+    enabled: true
+    image: sports-store-auth-service
+    tag: v1.0.0
+    port: 8001
+    metrics: true
+    replicas: 1
+    healthPath: /health
+    ingressPath: /api/auth
+    env:
+      - name: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "90"
+      - name: MONGO_URI
+        valueFrom:
+          secretKeyRef:
+            name: sports-store-app-secrets
+            key: MONGO_URI
+      - name: JWT_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: sports-store-app-secrets
+            key: JWT_SECRET
+      - name: REDIS_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: sports-store-redis-secrets
+            key: redis-password
+            optional: true
+      - name: REDIS_SENTINELS
+        value: "sports-store-redis-sentinel:26379"
+      - name: REDIS_MASTER_NAME
+        value: "mymaster"
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 250m
+        memory: 256Mi
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 5
+      targetCPUUtilizationPercentage: 70
+
+  catalog:
+    enabled: true
+    image: sports-store-catalog-service
+    tag: v1.0.0
+    port: 8002
+    metrics: true
+    replicas: 1
+    healthPath: /health
+    ingressPath: /api/products
+    env:
+      - name: MONGO_URI
+        valueFrom:
+          secretKeyRef:
+            name: sports-store-app-secrets
+            key: MONGO_URI
+    resources:
+      requests:
+        cpu: 250m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 256Mi
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 5
+      targetCPUUtilizationPercentage: 70
+
+  cart:
+    enabled: true
+    image: sports-store-cart-service
+    tag: v1.0.0
+    port: 8003
+    metrics: true
+    replicas: 1
+    healthPath: /health
+    ingressPath: /api/cart
+    env:
+      - name: CATALOG_URL
+        value: http://catalog:8002
+      - name: MONGO_URI
+        valueFrom:
+          secretKeyRef:
+            name: sports-store-app-secrets
+            key: MONGO_URI
+      - name: REDIS_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: sports-store-redis-secrets
+            key: redis-password
+            optional: true
+      - name: REDIS_SENTINELS
+        value: "sports-store-redis-sentinel:26379"
+      - name: REDIS_MASTER_NAME
+        value: "mymaster"
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 250m
+        memory: 256Mi
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 5
+      targetCPUUtilizationPercentage: 70
+
+  order:
+    enabled: true
+    image: sports-store-order-service
+    tag: v1.0.0
+    port: 8004
+    metrics: true
+    replicas: 1
+    healthPath: /health
+    ingressPath: /api/orders
+    env:
+      - name: CART_URL
+        value: http://cart:8003
+      - name: CATALOG_URL
+        value: http://catalog:8002
+      - name: PAYMENT_URL
+        value: http://payment:8005
+      - name: SHIPPING_FLAT_RATE
+        value: "5.00"
+      - name: FREE_SHIPPING_THRESHOLD
+        value: "100"
+      - name: MONGO_URI
+        valueFrom:
+          secretKeyRef:
+            name: sports-store-app-secrets
+            key: MONGO_URI
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 250m
+        memory: 256Mi
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 5
+      targetCPUUtilizationPercentage: 70
+
+  payment:
+    enabled: true
+    image: sports-store-payment-service
+    tag: v1.0.0
+    port: 8005
+    metrics: true
+    replicas: 1
+    healthPath: /health
+    ingressPath: /api/payments
+    env:
+      - name: PAYMENT_FAILURE_SUFFIX
+        value: "0000"
+      - name: MONGO_URI
+        valueFrom:
+          secretKeyRef:
+            name: sports-store-app-secrets
+            key: MONGO_URI
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 250m
+        memory: 256Mi
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 5
+      targetCPUUtilizationPercentage: 70
+
+redis:
+  enabled: true
+  architecture: replication
+  auth:
+    enabled: true
+    existingSecret: sports-store-redis-secrets
+    existingSecretPasswordKey: redis-password
+  sentinel:
+    enabled: true
+    masterSet: mymaster
+    persistentVolumeClaimRetentionPolicy:
+      enabled: true
+      whenScaled: Retain
+      whenDeleted: Retain
+    persistence:
+      enabled: true
+      storageClass: standard
+      size: 8Gi
+  master:
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - redis
+            topologyKey: topology.kubernetes.io/zone
+  replica:
+    replicaCount: 3
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - redis
+            topologyKey: topology.kubernetes.io/zone

@@ -1,0 +1,6 @@
+2024-03-01 08:05:00 ERROR Failed to connect to cache server: Connection refused
+2024-03-01 08:08:44 ERROR Disk write failed: No space left on device /var/log
+2024-03-01 08:11:33 ERROR Authentication failed for user 'unknown' from 203.0.113.5
+2024-03-01 08:15:01 ERROR Backup failed: Remote host unreachable
+2024-03-01 08:22:00 ERROR Database connection pool exhausted: 50/50 connections in use
+2024-03-01 08:22:01 ERROR Unable to process new requests: no available connections

@@ -1,0 +1,127 @@
+name: CI
+
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      fail_mode:
+        description: "Should the workflow fail?"
+        required: false
+        default: false
+        type: boolean
+      flaky_mode:
+        description: "Should the workflow behave flaky?"
+        required: false
+        default: false
+        type: boolean
+jobs:
+  lint-typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node setup
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Clean install
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+  test:
+    needs: lint-typecheck
+    runs-on: ${{ matrix.os }}
+    outputs:
+      result: ${{ inputs.fail_mode && steps.tests_fail.outcome || inputs.flaky_mode && steps.tests_flaky.outcome || steps.tests.outcome }}
+      conclusion: ${{ inputs.fail_mode && steps.tests_fail.conclusion || inputs.flaky_mode && steps.tests_flaky.conclusion || steps.tests.conclusion }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [20, 22]
+        experimental: [false]
+        include:
+          - os: ubuntu-latest
+            node: 18
+            experimental: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node setup
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests - regular mode
+        id: tests
+        if: ${{ !inputs.fail_mode && !inputs.flaky_mode }}
+        continue-on-error: ${{ matrix.experimental }}
+        run: npm test
+
+      - name: Run tests - fail mode
+        id: tests_fail
+        if: ${{ inputs.fail_mode }}
+        continue-on-error: ${{ matrix.experimental }}
+        env:
+          FAIL_MODE: 1
+        run: npm test
+
+      - name: Run tests - flaky mode
+        id: tests_flaky
+        if: ${{ !inputs.fail_mode && inputs.flaky_mode }}
+        continue-on-error: ${{ matrix.experimental }}
+        env:
+          FLAKY_MODE: 1
+        run: npm test
+
+      - name: Success
+        if: ${{ success() }}
+        run: echo "Tests passed on ${{ matrix.os }} with Node ${{ matrix.node }}"
+
+      - name: Failure
+        if: ${{ failure() }}
+        run: |
+          echo "Tests failed on ${{ matrix.os }} with Node ${{ matrix.node }}"
+          echo "regular outcome=${{ steps.tests.outcome }} conclusion=${{ steps.tests.conclusion }}"
+          echo "fail outcome=${{ steps.tests_fail.outcome }} conclusion=${{ steps.tests_fail.conclusion }}"
+          echo "flaky outcome=${{ steps.tests_flaky.outcome }} conclusion=${{ steps.tests_flaky.conclusion }}"
+
+      - name: Clean up
+        if: ${{ always() }}
+        run: |
+          echo "Cleanup always runs"
+          echo "regular outcome=${{ steps.tests.outcome }} conclusion=${{ steps.tests.conclusion }}"
+          echo "fail outcome=${{ steps.tests_fail.outcome }} conclusion=${{ steps.tests_fail.conclusion }}"
+          echo "flaky outcome=${{ steps.tests_flaky.outcome }} conclusion=${{ steps.tests_flaky.conclusion }}"
+
+  report:
+    needs: test
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show job outputs
+        run: |
+          echo "needs.test.result=${{ needs.test.result }}"
+          echo "needs.test.outputs.result=${{ needs.test.outputs.result }}"
+          echo "needs.test.outputs.conclusion=${{ needs.test.outputs.conclusion }}"
+
+      - name: Pass gate
+        if: ${{ needs.test.result == 'success' }}
+        run: echo "Required test matrix legs passed"
+
+      - name: Fail gate
+        if: ${{ needs.test.result != 'success' }}
+        run: exit 1

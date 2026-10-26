@@ -1,0 +1,39 @@
+name: my-workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "Hello from GitHub Actions!"
+      - name: print trigger user
+        run: echo "ran by ${{github.actor}}"
+      - name: loop
+        run: |
+          for i in {1..5}
+          do
+            echo $i
+          done
+      - name: simulate building
+        run: |
+          echo "Building..."
+          sleep 2
+          echo "Done!"
+
+  info:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: os info
+        run: uname -a
+      - name: cpus
+        run: nproc
+      - name: branch name
+        run: echo ${{github.ref_name}}
+
+

@@ -1,0 +1,141 @@
+name: Helm validation
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/helm.yml"
+      - "apps/sports-store-production.yaml"
+      - "apps/root-app.yaml"
+      - "apps/argo-rollouts.yaml"
+      - "apps/platform-controllers.yaml"
+      - "apps/kubecost/**"
+      - "apps/k8sgpt/**"
+      - "apps/infrastructure.yaml"
+      - "bootstrap/**"
+      - "scripts/bootstrap-gitops.ps1"
+      - "projects/**"
+      - "environments/production/images/**"
+      - "helm/sports-store/**"
+      - "tests/dep-238.sh"
+      - "tests/dep-239.sh"
+      - "tests/gitops-bootstrap-runtime.sh"
+      - "tests/dep-248.sh"
+      - "tests/dep-251.sh"
+      - "tests/dep-264.sh"
+      - "tests/dep-264.py"
+      - "load-testing/k6/**"
+      - "tests/dep-296.sh"
+      - "tests/dep-296.py"
+      - "apps/k8sgpt/**"
+      - "tests/dep-360.sh"
+      - "tests/dep-360.py"
+      - "tests/dep-361.sh"
+      - "tests/dep-361.py"
+      - "tests/dep-336.sh"
+      - "tests/dep-336.py"
+      - "tests/dep-324.sh"
+      - "tests/dep-324.py"
+  push:
+    paths:
+      - ".github/workflows/helm.yml"
+      - "apps/sports-store-production.yaml"
+      - "apps/root-app.yaml"
+      - "apps/argo-rollouts.yaml"
+      - "apps/platform-controllers.yaml"
+      - "apps/kubecost/**"
+      - "apps/k8sgpt/**"
+      - "apps/infrastructure.yaml"
+      - "bootstrap/**"
+      - "scripts/bootstrap-gitops.ps1"
+      - "projects/**"
+      - "environments/production/images/**"
+      - "helm/sports-store/**"
+      - "tests/dep-238.sh"
+      - "tests/dep-239.sh"
+      - "tests/gitops-bootstrap-runtime.sh"
+      - "tests/dep-248.sh"
+      - "tests/dep-251.sh"
+      - "tests/dep-264.sh"
+      - "tests/dep-264.py"
+      - "load-testing/k6/**"
+      - "tests/dep-296.sh"
+      - "tests/dep-296.py"
+      - "apps/k8sgpt/**"
+      - "tests/dep-360.sh"
+      - "tests/dep-360.py"
+      - "tests/dep-361.sh"
+      - "tests/dep-361.py"
+      - "tests/dep-336.sh"
+      - "tests/dep-336.py"
+      - "tests/dep-324.sh"
+      - "tests/dep-324.py"
+
+permissions:
+  contents: read
+
+jobs:
+  branch-name:
+    name: Branch name validation
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate branch name
+        env:
+          BRANCH_NAME: ${{ github.head_ref }}
+        run: |
+          if [[ ! "$BRANCH_NAME" =~ ^(feature|bugfix|hotfix)/[a-z0-9]+(-[a-z0-9]+)*$ ]]; then
+            printf 'Invalid branch name: %s\n' "$BRANCH_NAME"
+            printf 'Use feature/, bugfix/, or hotfix/ followed by a lowercase kebab-case slug.\n'
+            exit 1
+          fi
+
+  validate:
+    name: Helm chart validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-helm@v4
+        with:
+          version: v3.18.6
+      - name: Install helm-unittest
+        run: helm plugin install https://github.com/helm-unittest/helm-unittest.git --version 1.0.3
+      - name: Add official controller chart repositories
+        run: |
+          helm repo add argo https://argoproj.github.io/argo-helm
+          helm repo add eks https://aws.github.io/eks-charts
+          helm repo add external-secrets https://charts.external-secrets.io
+          helm repo update argo eks external-secrets
+      - name: Build chart dependencies
+        working-directory: helm/sports-store
+        run: |
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm dependency build .
+          for archive in charts/*.tgz; do
+            tar -xzf "$archive" -C charts
+          done
+      - name: Lint chart
+        working-directory: helm/sports-store
+        run: |
+          helm lint .
+          helm lint . -f values-eks.yaml
+      - name: Render chart
+        working-directory: helm/sports-store
+        run: |
+          helm template sports-store . --namespace sports-store > /dev/null
+          helm template sports-store . --namespace sports-store -f values-eks.yaml > /dev/null
+      - name: Test rendered manifests
+        working-directory: helm/sports-store
+        run: helm unittest --strict .
+      - name: Test controller bootstrap
+        run: |
+          bash tests/dep-238.sh
+          bash tests/dep-239.sh
+          bash tests/gitops-bootstrap-runtime.sh
+          bash tests/dep-248.sh
+          bash tests/dep-251.sh
+          bash tests/dep-264.sh
+          bash tests/dep-296.sh
+          bash tests/dep-360.sh
+          bash tests/dep-361.sh
+          bash tests/dep-336.sh
+          bash tests/dep-324.sh

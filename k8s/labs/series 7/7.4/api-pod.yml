@@ -1,0 +1,20 @@
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: movie-api
+#   namespace: dev
+#   labels:
+#     app: movie-api
+# spec:
+#   containers:
+#   - name: movie-api
+#     image: davidsnir/movie-api:v2.1
+#     resources:
+#       requests: 
+#         cpu: "200m"
+#         memory: "256Mi"
+#       limits:
+#         memory: "512Mi"
+#         cpu: "500m"
+#     ports:
+#       - containerPort: 3000

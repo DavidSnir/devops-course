@@ -1,0 +1,116 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-volume
+
+spec:
+  capacity:
+    storage: 1Gi
+    # We define the total capacity of this volume as 1Gi
+
+  volumeMode: Filesystem
+  # This defines whether the volume is formatted as a filesystem
+  # Default is Filesystem
+  # Could also be Block if raw block device is needed
+
+  accessModes:
+    - ReadWriteOnce
+    # This means the volume can be mounted as read-write
+    # by a single node
+    # Makes sense because this is a local directory on a node
+
+  persistentVolumeReclaimPolicy: Retain
+  # Defines what happens when the claim is deleted
+  # Retain = keep the data
+  # Default for manually created PVs is Retain
+  # For dynamically provisioned PVs, default is Delete
+
+  storageClassName: local-storage
+  # This will be used later by the PVC
+  # PVC will search for volumes with this storageClassName
+
+  local:
+    path: /mnt/disks/local1
+    # This path MUST exist on the node
+    # We are intentionally NOT creating it yet
+    # We want to see the error later
+
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - minikube
+              # This ensures Pods using this volume
+              # are scheduled only on this node
+              # Otherwise the path would not exist
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: local-volume-claim
+
+spec:
+  accessModes:
+    - ReadWriteOnce
+    # Must match the PV access mode
+
+  volumeMode: Filesystem
+  # Must match PV volumeMode
+
+  resources:
+    requests:
+      storage: 1Gi
+      # Intentionally requesting MORE than available (PV has 1Gi)
+      # This should cause a Pending state
+
+  storageClassName: local-storage
+  # PVC will look only for PVs with this storageClassName
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: local-volume-pod
+spec:
+  containers:
+    - name: local-volume
+      image: busybox:1.36.1
+
+      # Keep container alive for testing
+      command: ["sh", "-c", "sleep 3600"]
+
+      volumeMounts:
+        - name: local-volume
+          mountPath: /mnt/local
+          # This is where the PVC will be mounted inside the container
+
+  volumes:
+    - name: local-volume
+      persistentVolumeClaim:
+        claimName: local-volume-claim
+        # This must match the PVC metadata.name
+        # This connects the Pod  to the PVC
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: local-volume-pod-2
+spec:
+  containers:
+    - name: local-volume-two
+      image: busybox:1.36.1
+      command: ["sh", "-c", "sleep 3600"]
+
+      volumeMounts:
+        - name: local-volume
+          mountPath: /mnt/local2
+          # Mounted at different path
+          # Same underlying storage
+
+  volumes:
+    - name: local-volume
+      persistentVolumeClaim:
+        claimName: local-volume-claim

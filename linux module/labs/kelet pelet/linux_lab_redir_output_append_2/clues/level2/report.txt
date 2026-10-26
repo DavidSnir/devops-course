@@ -1,0 +1,25 @@
+
+
+asd
+========================================
+SYSTEM REPORT - Fri Mar  6 18:39:33 IST 2026
+========================================
+
+--- DISK USAGE ---
+Filesystem        Size    Used   Avail Capacity iused ifree %iused  Mounted on
+/dev/disk3s1s1   228Gi    11Gi    10Gi    53%    451k  107M    0%   /
+devfs            202Ki   202Ki     0Bi   100%     700     0  100%   /dev
+/dev/disk3s6     228Gi   7.0Gi    10Gi    41%       7  107M    0%   /System/Volumes/VM
+/dev/disk3s2     228Gi   8.8Gi    10Gi    47%    1.8k  107M    0%   /System/Volumes/Preboot
+/dev/disk3s4     228Gi   3.9Mi    10Gi     1%      67  107M    0%   /System/Volumes/Update
+/dev/disk1s2     500Mi   6.0Mi   483Mi     2%       1  4.9M    0%   /System/Volumes/xarts
+/dev/disk1s1     500Mi   5.6Mi   483Mi     2%      34  4.9M    0%   /System/Volumes/iSCPreboot
+/dev/disk1s3     500Mi   1.0Mi   483Mi     1%      89  4.9M    0%   /System/Volumes/Hardware
+/dev/disk3s5     228Gi   188Gi    10Gi    95%    1.6M  107M    1%   /System/Volumes/Data
+map auto_home      0Bi     0Bi     0Bi   100%       0     0     -   /System/Volumes/Data/home
+/dev/disk2s1     5.0Gi   1.9Gi   3.0Gi    40%      63   32M    0%   /System/Volumes/Update/SFR/mnt1
+/dev/disk4s1      91Mi    76Mi    14Mi    85%      25  4.3G    0%   /Volumes/Anki
+
+--- MEMORY ---
+
+--- END OF REPORT ---

@@ -1,0 +1,30 @@
+services:
+  inventory:
+    image: inventory-service:1.0
+    container_name: inventory
+    build:
+      context: ./inventory-service
+      dockerfile: Dockerfile
+    networks:
+      - app-net
+    restart: unless-stopped
+
+  orders:
+    depends_on:
+      - inventory
+    image: orders-service
+    container_name: orders
+    build:
+      context: ./orders-service
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - INVENTORY_URL=http://inventory.microsvc.local:8080
+    networks:
+      - app-net
+    restart: unless-stopped
+
+networks:
+  app-net:
+    driver: bridge

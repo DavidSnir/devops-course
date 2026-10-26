@@ -1,0 +1,42 @@
+# Terraform local working directories
+**/.terraform/*
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Terraform plan output
+*.tfplan
+tfplan
+plan.out
+
+# Terraform variable files that may contain secrets
+*.tfvars
+*.tfvars.json
+
+# Terraform crash and log files
+crash.log
+crash.*.log
+*.log
+
+# Terraform override files are usually local-only
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# CLI configuration
+.terraformrc
+terraform.rc
+
+# Local OIDC Connect files
+oidc-connect/
+
+# OS and editor files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+backend/secret.yaml

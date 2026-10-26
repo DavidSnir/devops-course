@@ -1,0 +1,17 @@
+{
+  "name": "aws-self-hosted-runner-ci-cd-test",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Minimal Node app for testing CI/CD deployment to an EC2 self-hosted runner.",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "node --test",
+    "build": "node scripts/build.js",
+    "start": "node src/app.js",
+    "start:dist": "node dist/app.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "UNLICENSED"
+}

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: movie-statefulset
+spec:
+  serviceName: movie-service   # MUST match Service name
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: movie-api
+
+  template:
+    metadata:
+      labels:
+        app: movie-api
+    spec:
+      containers:
+        - name: movie-api
+          image: davidsnir/movie-api:v2
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: temp-data
+              mountPath: /tmp/data
+
+  volumeClaimTemplates:
+    - metadata:
+        name: temp-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: standard
+        resources:
+          requests:
+            storage: 128Mi

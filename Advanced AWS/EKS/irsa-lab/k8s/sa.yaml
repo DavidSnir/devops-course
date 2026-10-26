@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: app
+  namespace: default
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::379604374595:role/s3-readonly-role

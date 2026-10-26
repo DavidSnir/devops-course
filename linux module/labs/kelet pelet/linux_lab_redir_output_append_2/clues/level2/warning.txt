@@ -1,0 +1,12 @@
+2024-03-01 08:02:15 WARN  Slow query detected: 3200ms (threshold: 1000ms)
+2024-03-01 08:06:00 WARN  Retrying SSL on alternate port 9443
+2024-03-01 08:08:00 WARN  Deployment running in degraded mode: 1 node offline
+2024-03-01 08:12:00 WARN  Memory usage at 82%: consider restarting app workers
+2024-03-01 08:15:00 WARN  Connection pool near capacity: 9/10 connections active
+2024-03-01 08:17:00 WARN  Slow query detected: 2800ms (threshold: 1000ms)
+2024-03-01 08:02:15 WARN  Slow query detected: 3200ms (threshold: 1000ms)
+2024-03-01 08:06:00 WARN  Retrying SSL on alternate port 9443
+2024-03-01 08:08:00 WARN  Deployment running in degraded mode: 1 node offline
+2024-03-01 08:12:00 WARN  Memory usage at 82%: consider restarting app workers
+2024-03-01 08:15:00 WARN  Connection pool near capacity: 9/10 connections active
+2024-03-01 08:17:00 WARN  Slow query detected: 2800ms (threshold: 1000ms)

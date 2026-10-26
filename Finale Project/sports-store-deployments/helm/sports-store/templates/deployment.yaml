@@ -1,0 +1,120 @@
+{{- range $name, $svc := .Values.services }}
+{{- if and $svc.enabled (has $name $.Values.enabledServices) }}
+{{- $tag := required (printf "services.%s.tag must be set" $name) $svc.tag }}
+{{- if not (regexMatch "^[A-Za-z0-9_][A-Za-z0-9._-]{0,127}$" (toString $tag)) }}
+{{- fail (printf "services.%s.tag is not a valid container image tag" $name) }}
+{{- end }}
+---
+apiVersion: {{ if or (eq $name "catalog") (eq $name "order") }}argoproj.io/v1alpha1{{ else }}apps/v1{{ end }}
+kind: {{ if or (eq $name "catalog") (eq $name "order") }}Rollout{{ else }}Deployment{{ end }}
+metadata:
+  name: {{ $name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "sports-store.selectorLabels" $name | nindent 4 }}
+    {{- include "sports-store.labels" $ | nindent 4 }}
+spec:
+  {{- if not (and $svc.autoscaling $svc.autoscaling.enabled) }}
+  replicas: {{ $svc.replicas }}
+  {{- end }}
+  {{- if or (eq $name "catalog") (eq $name "order") }}
+  revisionHistoryLimit: 3
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "sports-store.selectorLabels" $name | nindent 6 }}
+  {{- if or (eq $name "catalog") (eq $name "order") }}
+  strategy:
+    canary:
+      stableService: {{ $name }}
+      canaryService: {{ $name }}-canary
+      {{- if $.Values.platform.canaryAnalysis }}
+      # Background analysis: starts after the first setWeight step (10% canary
+      # traffic) and runs continuously throughout the rollout. Argo Rollouts
+      # injects the canary/stable ReplicaSet hashes via podTemplateHashValue, so
+      # the AnalysisTemplate can compare the new version against the running
+      # baseline and abort on regression — not just on absolute SLOs.
+      analysis:
+        templates:
+          - templateName: sports-store-canary-analysis
+        args:
+          - name: service-name
+            value: {{ $name }}
+          - name: canary-hash
+            valueFrom:
+              podTemplateHashValue: Latest
+          - name: stable-hash
+            valueFrom:
+              podTemplateHashValue: Stable
+        startingStep: 1
+      {{- end }}
+      trafficRouting:
+        {{- if eq $.Values.ingress.className "alb" }}
+        alb:
+          ingress: {{ include "sports-store.fullname" $ }}
+          rootService: {{ $name }}
+          servicePort: {{ $svc.port }}
+        {{- else if eq $.Values.ingress.className "nginx" }}
+        nginx:
+          stableService: {{ $name }}
+        {{- end }}
+      steps:
+        - setWeight: 10
+        # 2-minute soaks give the AnalysisRun time to collect 4 Prometheus
+        # checks (interval: 30s) per step before advancing weight.
+        - pause: { duration: 2m }
+        - setWeight: 25
+        - pause: { duration: 2m }
+        - setWeight: 50
+        - pause: { duration: 2m }
+        - setWeight: 75
+        - pause: { duration: 2m }
+  {{- end }}
+  template:
+    metadata:
+      labels:
+        {{- include "sports-store.selectorLabels" $name | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ $name }}
+          image: "{{ $svc.image }}:{{ $tag }}"
+          imagePullPolicy: {{ $.Values.imagePullPolicy }}
+          ports:
+            - containerPort: {{ $svc.port }}
+              {{- if $svc.metrics }}
+              name: http-metrics
+              {{- end }}
+          {{- if $svc.env }}
+          env:
+            {{- range $svc.env }}
+            - name: {{ .name }}
+              {{- if hasKey . "value" }}
+              value: {{ .value | quote }}
+              {{- else if .valueFrom }}
+              valueFrom:
+                {{- toYaml .valueFrom | nindent 16 }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
+          securityContext:
+            {{- toYaml $.Values.containerSecurityContext | nindent 12 }}
+          readinessProbe:
+            httpGet:
+              path: {{ $svc.healthPath | default "/health" }}
+              port: {{ $svc.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 6
+          livenessProbe:
+            httpGet:
+              path: {{ $svc.healthPath | default "/health" }}
+              port: {{ $svc.port }}
+            initialDelaySeconds: 10
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 8
+          resources:
+            {{- toYaml $svc.resources | nindent 12 }}
+{{- end }}
+{{- end }}

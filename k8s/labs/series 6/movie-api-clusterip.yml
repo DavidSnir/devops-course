@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: movie-api-clusterip
+  labels:
+    app: movie-api
+spec:
+  type: ClusterIP
+  selector:
+    app: movie-api
+  ports:
+  - port: 3000
+    targetPort: 3000
+

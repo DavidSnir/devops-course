@@ -1,0 +1,1468 @@
+{
+  "purpose": "Current source snapshot before machine reset; original Git histories, ignored data, and withheld files are in the external-drive archive.",
+  "source": "/Users/davidsnir/devops-course",
+  "nested_repositories_flattened": [
+    {
+      "path": ".",
+      "branch": "main",
+      "head": "6be06f9c915ff3d51193bdd109745ff6acdcccd3",
+      "refs": [
+        [
+          "refs/heads/feature/bootstrap-argocd-helm",
+          "6be06f9c915ff3d51193bdd109745ff6acdcccd3"
+        ],
+        [
+          "refs/heads/main",
+          "6be06f9c915ff3d51193bdd109745ff6acdcccd3"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "terraform/labs/Mid Lab",
+      "branch": "main",
+      "head": "b7b4210544069fcaeba63e219ccde3a29da9a01f",
+      "refs": [
+        [
+          "refs/heads/main",
+          "b7b4210544069fcaeba63e219ccde3a29da9a01f"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "terraform/labs/series-12/example-terraform-cloud",
+      "branch": "main",
+      "head": "d6730a064472178a2754d19d18e78b1cbe9474c5",
+      "refs": [
+        [
+          "refs/heads/main",
+          "d6730a064472178a2754d19d18e78b1cbe9474c5"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "passover_work/ATM-with_david",
+      "branch": "main",
+      "head": "aa4edf515739f9c24d720cc1cda60eaa8d86c3eb",
+      "refs": [
+        [
+          "refs/heads/feature/log",
+          "f3339c41b9d381b17da3307719b39f726d30a832"
+        ],
+        [
+          "refs/heads/feature/login-screen",
+          "819e59f13f18fca97c9626bbdb3c3e381362aeb3"
+        ],
+        [
+          "refs/heads/feature/remove-pin-from-transaction-in",
+          "27a1ae51521975a0f667ca88fa0d277d03fb5ee4"
+        ],
+        [
+          "refs/heads/main",
+          "aa4edf515739f9c24d720cc1cda60eaa8d86c3eb"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "docker/react-ts-app",
+      "branch": "main",
+      "head": "0d18c6556fb5f989c7bece3df8a092d110877cff",
+      "refs": [
+        [
+          "refs/heads/main",
+          "0d18c6556fb5f989c7bece3df8a092d110877cff"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "docker/react-bind-dev",
+      "branch": "main",
+      "head": "3d1977d60008820d0ce594d6cc18a8116c7d74b1",
+      "refs": [
+        [
+          "refs/heads/main",
+          "3d1977d60008820d0ce594d6cc18a8116c7d74b1"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "Advanced AWS/ECR/labs/ecr-lab-v1",
+      "branch": "main",
+      "head": "37a3e26debcdd1958a4e99efb0018e8f91fe2ea6",
+      "refs": [
+        [
+          "refs/heads/main",
+          "37a3e26debcdd1958a4e99efb0018e8f91fe2ea6"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "Advanced AWS/ECR/labs/ecr-asg-s-test",
+      "branch": "main",
+      "head": "9df40cb032afdfe8750dc487ba63f1cb0e77a1b2",
+      "refs": [
+        [
+          "refs/heads/main",
+          "9df40cb032afdfe8750dc487ba63f1cb0e77a1b2"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "Advanced AWS/ECR/labs/DevOps-Materials",
+      "branch": "main",
+      "head": "7b9460569d6dfbb9e85e82ef0b90c5c05c26b25b",
+      "refs": [
+        [
+          "refs/heads/main",
+          "7b9460569d6dfbb9e85e82ef0b90c5c05c26b25b"
+        ],
+        [
+          "refs/tags/lab12-processes-basics",
+          "4d771e7462edcf0efde5b583fbc0138f8608d4e2"
+        ],
+        [
+          "refs/tags/lab13-processes-kill",
+          "d12835e89f665b215958573548f22e9363f17040"
+        ],
+        [
+          "refs/tags/lab14-processes-vs-service",
+          "d12835e89f665b215958573548f22e9363f17040"
+        ],
+        [
+          "refs/tags/lab15-systemd-services",
+          "d12835e89f665b215958573548f22e9363f17040"
+        ],
+        [
+          "refs/tags/ports-lab-v1.0",
+          "8f01a00128dfe5ea2adee16ac5e36e520b6001ae"
+        ],
+        [
+          "refs/tags/v1.0",
+          "7c8e26a31b3104ee95fe539dbc061dd6d2795358"
+        ],
+        [
+          "refs/tags/v1.0-docker-container-basics",
+          "f8ece87dcb0b11cfe4d445402a22141f7c649be7"
+        ],
+        [
+          "refs/tags/v1.0-python-labs",
+          "5c026fb1158bc3fae001e1df5818d8cab18b309e"
+        ],
+        [
+          "refs/tags/v1.0-scenario",
+          "00794a0953cf4a51661af4c63f6602f07d61a4db"
+        ],
+        [
+          "refs/tags/v1.0-script-basics",
+          "3b0308df153e726a8ed360ba30fb842095a5db2c"
+        ],
+        [
+          "refs/tags/v1.0-script-case",
+          "3b0308df153e726a8ed360ba30fb842095a5db2c"
+        ],
+        [
+          "refs/tags/v1.0-script-conditionals",
+          "3b0308df153e726a8ed360ba30fb842095a5db2c"
+        ],
+        [
+          "refs/tags/v1.0-script-debugging",
+          "3b0308df153e726a8ed360ba30fb842095a5db2c"
+        ],
+        [
+          "refs/tags/v1.0-script-exit-codes",
+          "3b0308df153e726a8ed360ba30fb842095a5db2c"
+        ],
+        [
+          "refs/tags/v1.0-script-functions",
+          "3b0308df153e726a8ed360ba30fb842095a5db2c"
+        ],
+        [
+          "refs/tags/v1.0-script-input",
+          "3b0308df153e726a8ed360ba30fb842095a5db2c"
+        ],
+        [
+          "refs/tags/v1.0-script-loops",
+          "3b0308df153e726a8ed360ba30fb842095a5db2c"
+        ],
+        [
+          "refs/tags/v1.0-script-mini-devops-tool",
+          "3b0308df153e726a8ed360ba30fb842095a5db2c"
+        ],
+        [
+          "refs/tags/v1.0-script-ops-helper",
+          "3b0308df153e726a8ed360ba30fb842095a5db2c"
+        ],
+        [
+          "refs/tags/v1.0-script-variables",
+          "3b0308df153e726a8ed360ba30fb842095a5db2c"
+        ],
+        [
+          "refs/tags/v1.1",
+          "da58218a96de087a825c83b8fab50ceb13ec24a2"
+        ],
+        [
+          "refs/tags/v1.1-journalctl-logs",
+          "f8d1c0942dcab0c5772b9899595861aa0d7672be"
+        ],
+        [
+          "refs/tags/v1.1-processes-basics",
+          "f8d1c0942dcab0c5772b9899595861aa0d7672be"
+        ],
+        [
+          "refs/tags/v1.1-processes-kill",
+          "1b3ca966756ca82f790cfcfe2cf38ba447630619"
+        ],
+        [
+          "refs/tags/v1.1-processes-vs-service",
+          "1b3ca966756ca82f790cfcfe2cf38ba447630619"
+        ],
+        [
+          "refs/tags/v1.1-python-labs",
+          "97cafdadfe08484a45067012b851d6c794f2dac1"
+        ],
+        [
+          "refs/tags/v1.1-scenario",
+          "dff47356b616551b86a47311d20db237bcae93e9"
+        ],
+        [
+          "refs/tags/v1.1-script-basics",
+          "7dbe11caa6b9b590387c818755c70b6c147be116"
+        ],
+        [
+          "refs/tags/v1.1-script-case",
+          "bb1fb60148e89deea55ef0928fa392b673ed6abd"
+        ],
+        [
+          "refs/tags/v1.1-script-conditionals",
+          "d24163d518e4b6f8646dc77fee6fb4b1ef2f16c5"
+        ],
+        [
+          "refs/tags/v1.1-script-debugging",
+          "d24163d518e4b6f8646dc77fee6fb4b1ef2f16c5"
+        ],
+        [
+          "refs/tags/v1.1-script-exit-codes",
+          "d24163d518e4b6f8646dc77fee6fb4b1ef2f16c5"
+        ],
+        [
+          "refs/tags/v1.1-script-functions",
+          "bb1fb60148e89deea55ef0928fa392b673ed6abd"
+        ],
+        [
+          "refs/tags/v1.1-script-guessing-game",
+          "d24163d518e4b6f8646dc77fee6fb4b1ef2f16c5"
+        ],
+        [
+          "refs/tags/v1.1-script-input",
+          "d24163d518e4b6f8646dc77fee6fb4b1ef2f16c5"
+        ],
+        [
+          "refs/tags/v1.1-script-leap-year",
+          "d24163d518e4b6f8646dc77fee6fb4b1ef2f16c5"
+        ],
+        [
+          "refs/tags/v1.1-script-loops",
+          "d24163d518e4b6f8646dc77fee6fb4b1ef2f16c5"
+        ],
+        [
+          "refs/tags/v1.1-script-mini-devops-tool",
+          "d24163d518e4b6f8646dc77fee6fb4b1ef2f16c5"
+        ],
+        [
+          "refs/tags/v1.1-script-ops-helper",
+          "d24163d518e4b6f8646dc77fee6fb4b1ef2f16c5"
+        ],
+        [
+          "refs/tags/v1.1-script-variables",
+          "d24163d518e4b6f8646dc77fee6fb4b1ef2f16c5"
+        ],
+        [
+          "refs/tags/v1.1-shell-scripting-hardened",
+          "c744383d56b340813fb9d491ba14e9c1f4bf478e"
+        ],
+        [
+          "refs/tags/v1.1-systemd-services",
+          "1b3ca966756ca82f790cfcfe2cf38ba447630619"
+        ],
+        [
+          "refs/tags/v1.1-troubleshooting-flow",
+          "1b3ca966756ca82f790cfcfe2cf38ba447630619"
+        ],
+        [
+          "refs/tags/v1.2",
+          "c1c81443412057bb1ba09b46367893516cd5e54a"
+        ],
+        [
+          "refs/tags/v1.3",
+          "ea1bae0989271e0a384d687da1c622c021c8c084"
+        ],
+        [
+          "refs/tags/v1.4",
+          "ff91cca452c7f66798737afe7fc046d2a25fc944"
+        ],
+        [
+          "refs/tags/v12.0-permissions-lab",
+          "2cc2ca7cf88be293d7d2e10ac5a78464f6c607df"
+        ],
+        [
+          "refs/tags/v12.1-permissions-lab",
+          "93853b5d6fe8a77669f7e4fe978fd2ec82a01a72"
+        ],
+        [
+          "refs/tags/v2.0",
+          "581b5f85e1545f5b109d5767484d97008b0f7d8f"
+        ],
+        [
+          "refs/tags/v2.1",
+          "581b5f85e1545f5b109d5767484d97008b0f7d8f"
+        ],
+        [
+          "refs/tags/v2.10",
+          "33f2efb2d7f9c33e43847732819008846ad410cc"
+        ],
+        [
+          "refs/tags/v2.2",
+          "581b5f85e1545f5b109d5767484d97008b0f7d8f"
+        ],
+        [
+          "refs/tags/v2.3",
+          "581b5f85e1545f5b109d5767484d97008b0f7d8f"
+        ],
+        [
+          "refs/tags/v2.4",
+          "581b5f85e1545f5b109d5767484d97008b0f7d8f"
+        ],
+        [
+          "refs/tags/v2.5",
+          "3ff10073d2c685d40e3edb6ebfff665c13b26690"
+        ],
+        [
+          "refs/tags/v2.5.1",
+          "4966463d087120a2a19ed36fc1ac3eff2bf3f073"
+        ],
+        [
+          "refs/tags/v2.5.2",
+          "e7aeabec0aa2a612fe5debffa07686251e5c7e78"
+        ],
+        [
+          "refs/tags/v2.5.3",
+          "c364681e33ba7b1f22092296a9c8c5cb1c515457"
+        ],
+        [
+          "refs/tags/v2.5.4",
+          "5745268c61efe78b5aa8e51b9cf215554c7fcbad"
+        ],
+        [
+          "refs/tags/v2.5.5",
+          "cdf65b4759f07113e9d841b343a4e6d0cc2e0c4f"
+        ],
+        [
+          "refs/tags/v2.5.6",
+          "a8d65b29ffb3158aba0ed7195b9d0d9fd18e3b09"
+        ],
+        [
+          "refs/tags/v2.6",
+          "fdc6d9d31fce580758c5a0b9262f596c8a3ad49f"
+        ],
+        [
+          "refs/tags/v2.6.1",
+          "4966463d087120a2a19ed36fc1ac3eff2bf3f073"
+        ],
+        [
+          "refs/tags/v2.6.2",
+          "e7aeabec0aa2a612fe5debffa07686251e5c7e78"
+        ],
+        [
+          "refs/tags/v2.6.3",
+          "c364681e33ba7b1f22092296a9c8c5cb1c515457"
+        ],
+        [
+          "refs/tags/v2.6.4",
+          "5745268c61efe78b5aa8e51b9cf215554c7fcbad"
+        ],
+        [
+          "refs/tags/v2.7",
+          "3032e1a747d0c4cb0ad88733ed95919dbe3860d7"
+        ],
+        [
+          "refs/tags/v2.7.1",
+          "4966463d087120a2a19ed36fc1ac3eff2bf3f073"
+        ],
+        [
+          "refs/tags/v2.7.2",
+          "e7aeabec0aa2a612fe5debffa07686251e5c7e78"
+        ],
+        [
+          "refs/tags/v2.7.3",
+          "c364681e33ba7b1f22092296a9c8c5cb1c515457"
+        ],
+        [
+          "refs/tags/v2.7.4",
+          "5745268c61efe78b5aa8e51b9cf215554c7fcbad"
+        ],
+        [
+          "refs/tags/v2.8",
+          "77a3d4882fe30150699deb7c5c0d15db39c4a615"
+        ],
+        [
+          "refs/tags/v2.8.1",
+          "4966463d087120a2a19ed36fc1ac3eff2bf3f073"
+        ],
+        [
+          "refs/tags/v2.8.2",
+          "e7aeabec0aa2a612fe5debffa07686251e5c7e78"
+        ],
+        [
+          "refs/tags/v2.8.3",
+          "c364681e33ba7b1f22092296a9c8c5cb1c515457"
+        ],
+        [
+          "refs/tags/v2.8.4",
+          "5745268c61efe78b5aa8e51b9cf215554c7fcbad"
+        ],
+        [
+          "refs/tags/v2.9",
+          "d538d26d75dc218495fb118d84592bd707a06c7b"
+        ],
+        [
+          "refs/tags/v2.9.1",
+          "4966463d087120a2a19ed36fc1ac3eff2bf3f073"
+        ],
+        [
+          "refs/tags/v2.9.2",
+          "e7aeabec0aa2a612fe5debffa07686251e5c7e78"
+        ],
+        [
+          "refs/tags/v2.9.3",
+          "c364681e33ba7b1f22092296a9c8c5cb1c515457"
+        ],
+        [
+          "refs/tags/v2.9.4",
+          "5745268c61efe78b5aa8e51b9cf215554c7fcbad"
+        ],
+        [
+          "refs/tags/v3.0",
+          "49d8758babdc7b3e0abe0ad8579b9f559c67a29b"
+        ],
+        [
+          "refs/tags/v3.0.1",
+          "4966463d087120a2a19ed36fc1ac3eff2bf3f073"
+        ],
+        [
+          "refs/tags/v3.0.2",
+          "e7aeabec0aa2a612fe5debffa07686251e5c7e78"
+        ],
+        [
+          "refs/tags/v3.0.3",
+          "c364681e33ba7b1f22092296a9c8c5cb1c515457"
+        ],
+        [
+          "refs/tags/v3.0.4",
+          "5745268c61efe78b5aa8e51b9cf215554c7fcbad"
+        ],
+        [
+          "refs/tags/v4.0",
+          "07e7472e2f81ef85e901add574d81356b30aa857"
+        ],
+        [
+          "refs/tags/v4.1",
+          "44f680a87e6751a8aa4cce5d5012eeef23105f44"
+        ],
+        [
+          "refs/tags/v5.0-pipes-redirection",
+          "27c3635a9e35b03b61454c2f38eb196818001e9e"
+        ],
+        [
+          "refs/tags/v6.0-permissions",
+          "c1b56a752d342d69fd332656ac90a5b1d4912b77"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "Advanced AWS/ECR/labs/DevOps-Materials/microservices-ecs-deploy",
+      "branch": "main",
+      "head": "a5644c99c1a40408c62fcd3d826bedc26a5f657a",
+      "refs": [
+        [
+          "refs/heads/main",
+          "a5644c99c1a40408c62fcd3d826bedc26a5f657a"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "fifa app/FifaApp-infra",
+      "branch": "main",
+      "head": "3f9f467de8e3c746c032f56ec13bf0ade03057db",
+      "refs": [
+        [
+          "refs/heads/main",
+          "3f9f467de8e3c746c032f56ec13bf0ade03057db"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "fifa app/FifaApp-frontend",
+      "branch": "main",
+      "head": "3b16b6ec89b7ac856556e8c572eafdaf92d14d17",
+      "refs": [
+        [
+          "refs/heads/main",
+          "3b16b6ec89b7ac856556e8c572eafdaf92d14d17"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "fifa app/FifaApp-backend",
+      "branch": "main",
+      "head": "96d4ac8e0f9d46a2b7f6ce088b89ec0f885bad21",
+      "refs": [
+        [
+          "refs/heads/main",
+          "96d4ac8e0f9d46a2b7f6ce088b89ec0f885bad21"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "graphana/loki_student_terraform",
+      "branch": "main",
+      "head": "8a4f45b1b22c78cb86a78dd5b2d6bf24898eb6d2",
+      "refs": [
+        [
+          "refs/heads/main",
+          "8a4f45b1b22c78cb86a78dd5b2d6bf24898eb6d2"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "flask and automation module/todo-app",
+      "branch": "main",
+      "head": "356f820b6897d238f858bd61d85fb3d9320860b5",
+      "refs": [
+        [
+          "refs/heads/main",
+          "356f820b6897d238f858bd61d85fb3d9320860b5"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "QA-Interview-DevOps-Course",
+      "branch": "main",
+      "head": "7deb18aa00ea1a15392e38ed01ea66aa00f9e357",
+      "refs": [
+        [
+          "refs/heads/main",
+          "7deb18aa00ea1a15392e38ed01ea66aa00f9e357"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "git-and-github module/labs/1.8.1 - Branches Stress",
+      "branch": "master",
+      "head": "d7c1931b25142f048b52b180bdf312c2c836d8e3",
+      "refs": [
+        [
+          "refs/heads/feature-register",
+          "d7c1931b25142f048b52b180bdf312c2c836d8e3"
+        ],
+        [
+          "refs/heads/feature-settings",
+          "d7c1931b25142f048b52b180bdf312c2c836d8e3"
+        ],
+        [
+          "refs/heads/feture-login",
+          "d7c1931b25142f048b52b180bdf312c2c836d8e3"
+        ],
+        [
+          "refs/heads/master",
+          "d7c1931b25142f048b52b180bdf312c2c836d8e3"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "git-and-github module/labs/git-log-lab/project1",
+      "branch": "master",
+      "head": "2f93fc13f8c0978eda1df3a19b30c26e1a4c4252",
+      "refs": [
+        [
+          "refs/heads/master",
+          "2f93fc13f8c0978eda1df3a19b30c26e1a4c4252"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "git-and-github module/labs/git-log-lab/python-app",
+      "branch": "master",
+      "head": "73da5014d1a750b158456e01f05fdeba552b19e5",
+      "refs": [
+        [
+          "refs/heads/master",
+          "73da5014d1a750b158456e01f05fdeba552b19e5"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "git-and-github module/labs/git-log-lab/project3",
+      "branch": "master",
+      "head": "5e271d36490180aa0b9c916e102ca36866ec0d25",
+      "refs": [
+        [
+          "refs/heads/master",
+          "5e271d36490180aa0b9c916e102ca36866ec0d25"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "git-and-github module/labs/git-log-lab/project4",
+      "branch": "master",
+      "head": "5dbb9ed4b54ec4bb96c66f1eb6943b95c6564bfa",
+      "refs": [
+        [
+          "refs/heads/master",
+          "5dbb9ed4b54ec4bb96c66f1eb6943b95c6564bfa"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "git-and-github module/labs/git-log-lab/project2",
+      "branch": "master",
+      "head": "109cb13c4ce361a55bea48c3e64bde57c021f5d6",
+      "refs": [
+        [
+          "refs/heads/master",
+          "109cb13c4ce361a55bea48c3e64bde57c021f5d6"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "git-and-github module/labs/colaboration/todo-collab-lab",
+      "branch": "main",
+      "head": "b08ecdc247e9b758f2b6ea6108741fdbf23059b5",
+      "refs": [
+        [
+          "refs/heads/main",
+          "b08ecdc247e9b758f2b6ea6108741fdbf23059b5"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "git-and-github module/labs/colaboration/python-collab-turns",
+      "branch": "main",
+      "head": "a55b59e4eccd25c586d4cb068e1fd158f4336a64",
+      "refs": [
+        [
+          "refs/heads/main",
+          "a55b59e4eccd25c586d4cb068e1fd158f4336a64"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "Finale Project/sports-store-auth-service",
+      "branch": "main",
+      "head": "75530c9c905efd4e8a8654c5472ba044a755b5fc",
+      "refs": [
+        [
+          "refs/heads/feature/ai-review-live-validation",
+          "085b74695e6a08c92c2016c4bd97d082721edb7e"
+        ],
+        [
+          "refs/heads/feature/dep-227-be-implement-pr-ci-workflow-for-sports-store-gateway",
+          "e5098d793dda97cdc35be1c93c0e076e495f4d43"
+        ],
+        [
+          "refs/heads/feature/dep-228-pr-quality-security-validation",
+          "eef73e16bdf457ac1f2853b38d6f81d8b2f40959"
+        ],
+        [
+          "refs/heads/feature/dep-299-ciai-implement-ai-powered-pr-reviewer-with-openrouter",
+          "e429ff1b10f039e262b515c7f1087fa4818ffaf1"
+        ],
+        [
+          "refs/heads/feature/dep-314-ciai-build-pr-diff-review-runner",
+          "1c2b2abc44e66bdb35212fc15ce9f0c999cc48a4"
+        ],
+        [
+          "refs/heads/feature/dep-315-ciai-integrate-openrouter-and-validate-ai-findings",
+          "91b601d510c43885195438168d991a19577c9f70"
+        ],
+        [
+          "refs/heads/feature/dep-316-ciai-add-github-actions-workflow-and-persistent-pr-review",
+          "649c92cc1519a634fbcee3233818c3535de3bed0"
+        ],
+        [
+          "refs/heads/main",
+          "75530c9c905efd4e8a8654c5472ba044a755b5fc"
+        ],
+        [
+          "refs/heads/validation/dep-299-ai-review-base",
+          "1e5a9bb0f198f5403458644e7bfc9d5e32c77985"
+        ],
+        [
+          "refs/heads/validation/dep-299-base",
+          "a26107c0a1efec4840062edce9792fbb851eaf05"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "Finale Project/sports-store-infrastructure",
+      "branch": "feature/dep-331-prometheus-stack-degraded",
+      "head": "1398cf6cf2dc00db8c333ec778e22c79fbe6adfe",
+      "refs": [
+        [
+          "refs/heads/backup/dep-235-before-rebase",
+          "543ebfc8efc68e42b2f14fd97719836f31869b73"
+        ],
+        [
+          "refs/heads/bugfix/al2023-nodeadm-max-pods",
+          "25e4e3baa916b46e4a0a6da25ac3727d4dea4953"
+        ],
+        [
+          "refs/heads/bugfix/dep-332-enable-nodegroup-autoscaling-and-scale-out-eks-cluster-to",
+          "80268a98979e8c59468591a78f86574324522c23"
+        ],
+        [
+          "refs/heads/bugfix/increase-node-desired-size",
+          "774026db6a852072cddff0ea8461ec85a9f3d91f"
+        ],
+        [
+          "refs/heads/feature/argocd-bootstrap-ci",
+          "57bbba455812122d64f62a6d2d8c30015d1e5e9b"
+        ],
+        [
+          "refs/heads/feature/bootstrap-argocd-helm",
+          "accfe1dfa7bfab8c68fcded0d23962f97216b23f"
+        ],
+        [
+          "refs/heads/feature/dep-217-infra-terraform-static-security-analysis-compliance-gate",
+          "70439a2179d2dd403be634933fb70899b52c0fed"
+        ],
+        [
+          "refs/heads/feature/dep-234-infra-provision-aws-secrets-manager-container-iam-pod",
+          "83f21596474d73a513f4c912079d3b9d7448732f"
+        ],
+        [
+          "refs/heads/feature/dep-235-infra-populate-aws-secrets-manager-key-values-via-terraform",
+          "a69720ad822872f104f4bc0feac96789c35a0e18"
+        ],
+        [
+          "refs/heads/feature/dep-236-infra-deploy-external-secrets-operator-eso-configure",
+          "25f6a23c556903454b0d2648e25375d7abff6388"
+        ],
+        [
+          "refs/heads/feature/dep-291-sub-task-enable-dynamic-gp3-storageclass-persistence-via-ebs",
+          "fafcfc743c93bf7ef0be449262e0948a40e0c9aa"
+        ],
+        [
+          "refs/heads/feature/dep-299-ai-pr-reviewer",
+          "bc879bc733808d2c3fe20f6a1936a9e304dd7c09"
+        ],
+        [
+          "refs/heads/feature/dep-331-prometheus-stack-degraded",
+          "1398cf6cf2dc00db8c333ec778e22c79fbe6adfe"
+        ],
+        [
+          "refs/heads/feature/dep-342-point-cloudfront-api-to-the-real-alb-origin",
+          "311e57e00c8889806e6e6abaa51b517bb40d1a5d"
+        ],
+        [
+          "refs/heads/feature/enable-prefix-delegation",
+          "bbf8fb043a6f85d65bb637d9e3bd762ffd3332cb"
+        ],
+        [
+          "refs/heads/feature/oidc-infra",
+          "899d5de2527571c6225468b1b3e55bad10b719da"
+        ],
+        [
+          "refs/heads/main",
+          "1dfb6fd55ef94ae306fc4915748de8ddbe93cf88"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "Finale Project/sports-store-catalog-service",
+      "branch": "main",
+      "head": "d2f51a040d26433f7fb6b15b5347e6e21f70a4fe",
+      "refs": [
+        [
+          "refs/heads/feature/dep-228-pr-quality-security-validation",
+          "af062a962ae7a8a3e1c91e21c352d2e9e3512b9c"
+        ],
+        [
+          "refs/heads/feature/dep-299-ai-pr-reviewer",
+          "b3aec8c8f48e57ebb4ad040961d1027c822bc724"
+        ],
+        [
+          "refs/heads/main",
+          "d2f51a040d26433f7fb6b15b5347e6e21f70a4fe"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "Finale Project/sports-store-cart-service",
+      "branch": "main",
+      "head": "8e9a2b05b18c898566767d71ebf6128e14e8dd3e",
+      "refs": [
+        [
+          "refs/heads/feature/dep-228-pr-quality-security-validation",
+          "49b07e7a901ba2315e03238a5c6016813f156181"
+        ],
+        [
+          "refs/heads/feature/dep-299-ai-pr-reviewer",
+          "dd8b5e6e03d89760edb9493c99989ab1200d35c1"
+        ],
+        [
+          "refs/heads/main",
+          "8e9a2b05b18c898566767d71ebf6128e14e8dd3e"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "Finale Project/sports-store-local",
+      "branch": "main",
+      "head": "e1020e2d67bb4a3c962a70565c6d483b4153d1ab",
+      "refs": [
+        [
+          "refs/heads/feature/dep-299-ai-pr-reviewer",
+          "23a6089258c97a86099db9e0a5417816ba413fe1"
+        ],
+        [
+          "refs/heads/main",
+          "e1020e2d67bb4a3c962a70565c6d483b4153d1ab"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "Finale Project/sports-store-gateway",
+      "branch": "main",
+      "head": "8ebae9ed27e40f4bbe662ea6bcf0a92ca629dc27",
+      "refs": [
+        [
+          "refs/heads/bugfix/dep-330-production-gateway-degraded-outofsync",
+          "d3184253bcde44ccaf8d1ca9d16016ae45f1340f"
+        ],
+        [
+          "refs/heads/feature/dep-227-be-implement-pr-ci-workflow-for-sports-store-gateway",
+          "cd8c786d2ce52b5211eb40fc7b6703dd9a948aa3"
+        ],
+        [
+          "refs/heads/feature/dep-227-pr-ci",
+          "cd8c786d2ce52b5211eb40fc7b6703dd9a948aa3"
+        ],
+        [
+          "refs/heads/feature/dep-299-ai-pr-reviewer",
+          "b6ff2e0822cc658a0c335fdd3ae4ba8be2e94441"
+        ],
+        [
+          "refs/heads/main",
+          "8ebae9ed27e40f4bbe662ea6bcf0a92ca629dc27"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "Finale Project/sports-store-order-service",
+      "branch": "main",
+      "head": "f83514ea50ab249760cd94745415cac898f4fbb7",
+      "refs": [
+        [
+          "refs/heads/feature/dep-228-pr-quality-security-validation",
+          "4eaa58df06dde844917f7db77d8ed6a0bc2af9eb"
+        ],
+        [
+          "refs/heads/feature/dep-299-ai-pr-reviewer",
+          "c5cf64d3fe2b29513d01c930f88be650b7a6aafe"
+        ],
+        [
+          "refs/heads/main",
+          "f83514ea50ab249760cd94745415cac898f4fbb7"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "Finale Project/sports-store-frontend",
+      "branch": "main",
+      "head": "870a7a721ddfdf1c76176c49a793964ff748773d",
+      "refs": [
+        [
+          "refs/heads/feature/dep-226-fe-implement-pr-ci-workflow-for-sports-store-frontend",
+          "7198dae31f5a626874e11f0690f8eaefdd71c528"
+        ],
+        [
+          "refs/heads/feature/dep-299-ai-pr-reviewer",
+          "b5931bbaf4d5dca14fe93219ac80f63501498cc9"
+        ],
+        [
+          "refs/heads/feature/dep-32-infra-build-multi-stage-dockerfile-for-sports-store-frontend",
+          "befd554d8f3b4603e39b5cb9b24a7dce10f89f00"
+        ],
+        [
+          "refs/heads/main",
+          "870a7a721ddfdf1c76176c49a793964ff748773d"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "Finale Project/sports-store-payment-service",
+      "branch": "main",
+      "head": "f1c94af84d9888e57b046eb18579400a6c5ff77c",
+      "refs": [
+        [
+          "refs/heads/feature/dep-228-pr-quality-security-validation",
+          "bf5cf058d6389f6c1340998272795eee801bc886"
+        ],
+        [
+          "refs/heads/feature/dep-299-ai-pr-reviewer",
+          "6c0a3f23951d8674345a20cc3de4e6159a7d69fb"
+        ],
+        [
+          "refs/heads/main",
+          "f1c94af84d9888e57b046eb18579400a6c5ff77c"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "Finale Project/sports-store-deployments",
+      "branch": "feature/dep-324-test-verify-direct-alb-ingress-routing-outage-spof-isolation",
+      "head": "b803968e75c1231a1e2d885ba5bd3499cb0c0e0b",
+      "refs": [
+        [
+          "refs/heads/bugfix/dep-330-production-gateway-degraded-outofsync",
+          "9ceac565a7b138944d01d1187d23ff35d1022d5c"
+        ],
+        [
+          "refs/heads/bugfix/dep-359-fix-mongo-headless-hostname-in-mongo-uri-so-db-backed-apis",
+          "71ca3cdec9098256af16c06d1415d62002bbc63e"
+        ],
+        [
+          "refs/heads/docs/dep-331-observability-rotation",
+          "800790cdeb76556bd5e38d9283703901b47b7bd1"
+        ],
+        [
+          "refs/heads/feature/dep-236-infra-deploy-external-secrets-operator-eso-configure",
+          "ed6dbe0efa01d8cf71b7a4e444c27dd372dbf8fc"
+        ],
+        [
+          "refs/heads/feature/dep-237-infra-author-externalsecret-resource-map-secrets-into",
+          "68ef31d1c97b59acc9946957f457b28ed147fe8a"
+        ],
+        [
+          "refs/heads/feature/dep-284-infra-migrate-mongodb-storage-to-aws-ebs-gp3-and-statefulset",
+          "e2c148775abd5b4cac4c43946b4d925badd27e7d"
+        ],
+        [
+          "refs/heads/feature/dep-299-ai-pr-reviewer",
+          "e5dfe2eddc57911814dd54ea5318fbdf6da44113"
+        ],
+        [
+          "refs/heads/feature/dep-324-test-verify-direct-alb-ingress-routing-outage-spof-isolation",
+          "b803968e75c1231a1e2d885ba5bd3499cb0c0e0b"
+        ],
+        [
+          "refs/heads/feature/dep-331-prometheus-stack-degraded",
+          "31bfff49a01d94d2a96cbe80ed9e04d00fe22a79"
+        ],
+        [
+          "refs/heads/feature/dep-341-configure-alb-target-group-health-checks-to-use-health",
+          "e2747cd09297899886b7741cb849ea09a58c1ddd"
+        ],
+        [
+          "refs/heads/feature/helm-unvendor-deps",
+          "647d18b9cf1114c1db337971eb8fdd8d90ffd609"
+        ],
+        [
+          "refs/heads/feature/horizontal-autoscaling",
+          "ccaab4dc82f108f139236773ece79a0f7f2eb9dd"
+        ],
+        [
+          "refs/heads/main",
+          "ede3bf5ae04e6bc06519ac44b2dde8c8defa5c12"
+        ]
+      ],
+      "stash_commits": [
+        "a98acffce8203079649b6a26e2a1de8854e86867",
+        "3350d41f874cecde92a7c8d3088b001bbdea1e6b"
+      ]
+    },
+    {
+      "path": "Finale Project/cloudcart-capstone-starter",
+      "branch": "main",
+      "head": "d4c541c80dfdab168fe4d10223579953f6d3f15b",
+      "refs": [
+        [
+          "refs/heads/main",
+          "d4c541c80dfdab168fe4d10223579953f6d3f15b"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "aws/dynamic-syllabus/dynamic-syllabus",
+      "branch": "main",
+      "head": "d071ac02b5e1b30ad6a54c4bc757a16f8b163d71",
+      "refs": [
+        [
+          "refs/heads/main",
+          "d071ac02b5e1b30ad6a54c4bc757a16f8b163d71"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "aws/DataBite AWS Deployment Lab/IITC-2026",
+      "branch": "main",
+      "head": "e746971060f2c44da2f97874a1845b039a148f29",
+      "refs": [
+        [
+          "refs/heads/main",
+          "e746971060f2c44da2f97874a1845b039a148f29"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "aws/DataBite AWS Deployment Lab/IITC-2026/DataBite/clone test/IITC-2026",
+      "branch": "main",
+      "head": "e746971060f2c44da2f97874a1845b039a148f29",
+      "refs": [
+        [
+          "refs/heads/main",
+          "e746971060f2c44da2f97874a1845b039a148f29"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "aws/DataBite AWS Deployment Lab/IITC-2026/DataBite/frontend",
+      "branch": "main",
+      "head": "6813dced7522bb53f669a68d73a0bef760c7eea1",
+      "refs": [
+        [
+          "refs/heads/main",
+          "6813dced7522bb53f669a68d73a0bef760c7eea1"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "aws/DataBite AWS Deployment Lab/IITC-2026/DataBite/frontend/IITC-2026",
+      "branch": "main",
+      "head": "e746971060f2c44da2f97874a1845b039a148f29",
+      "refs": [
+        [
+          "refs/heads/main",
+          "e746971060f2c44da2f97874a1845b039a148f29"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "jenkins/labs/repo",
+      "branch": "master",
+      "head": "865005d8d65bbb77b5d181e9cf8b42606d5e49fb",
+      "refs": [
+        [
+          "refs/heads/master",
+          "865005d8d65bbb77b5d181e9cf8b42606d5e49fb"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "helm/movie-api-lab",
+      "branch": "main",
+      "head": "e1caa9d6d15a81abee7bf273602ccefcde8b767b",
+      "refs": [
+        [
+          "refs/heads/main",
+          "e1caa9d6d15a81abee7bf273602ccefcde8b767b"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "python-module",
+      "branch": "main",
+      "head": "4af10501c4f9e18870b5b20a09f0f685be512e4f",
+      "refs": [
+        [
+          "refs/heads/main",
+          "4af10501c4f9e18870b5b20a09f0f685be512e4f"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "github-actions/cicd-lab05-using-cache",
+      "branch": "main",
+      "head": "c1ea0f980effac10f599411fc294f43c836c32a6",
+      "refs": [
+        [
+          "refs/heads/main",
+          "c1ea0f980effac10f599411fc294f43c836c32a6"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "github-actions/devops-course-practice-example-react-app",
+      "branch": "main",
+      "head": "ac6558f0d0b6aeaf0647c6b90f4698bb22b0d18c",
+      "refs": [
+        [
+          "refs/heads/main",
+          "ac6558f0d0b6aeaf0647c6b90f4698bb22b0d18c"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "github-actions/cid-cd-day-1",
+      "branch": "main",
+      "head": "d1939aec25d9aef6505e6ccb94abbd8ae88e7221",
+      "refs": [
+        [
+          "refs/heads/main",
+          "d1939aec25d9aef6505e6ccb94abbd8ae88e7221"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "github-actions/my-first-pipeline",
+      "branch": "main",
+      "head": "9a72749d148c7ef4df6006c1ab7b5ed160f348fc",
+      "refs": [
+        [
+          "refs/heads/main",
+          "9a72749d148c7ef4df6006c1ab7b5ed160f348fc"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "github-actions/lab 09/express-api",
+      "branch": "main",
+      "head": "d42d843a88c24ac0e94a15830b6987839bb3cb51",
+      "refs": [
+        [
+          "refs/heads/main",
+          "d42d843a88c24ac0e94a15830b6987839bb3cb51"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "github-actions/company-api-release-lab",
+      "branch": "main",
+      "head": "158215b8e5feb344967cb376161b2076fb572b0e",
+      "refs": [
+        [
+          "refs/heads/main",
+          "158215b8e5feb344967cb376161b2076fb572b0e"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "github-actions/cicd-lab07-flow-matrix",
+      "branch": "main",
+      "head": "b4c06c6af56eabc0666f9998cf39c6419fdba9dc",
+      "refs": [
+        [
+          "refs/heads/main",
+          "b4c06c6af56eabc0666f9998cf39c6419fdba9dc"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "github-actions/aws-self-hosted-runner",
+      "branch": "main",
+      "head": "5d6f6e318e23bd268b14395baa27099a1cbe03af",
+      "refs": [
+        [
+          "refs/heads/main",
+          "5d6f6e318e23bd268b14395baa27099a1cbe03af"
+        ]
+      ],
+      "stash_commits": []
+    },
+    {
+      "path": "github-actions/cicd-lab06-secrets-and-envs",
+      "branch": "main",
+      "head": "d94784449eb041256f2284e4be4885b351a50fd1",
+      "refs": [
+        [
+          "refs/heads/main",
+          "d94784449eb041256f2284e4be4885b351a50fd1"
+        ]
+      ],
+      "stash_commits": []
+    }
+  ],
+  "withheld_from_github": [
+    {
+      "path": "Advanced AWS/EKS/irsa-lab/data/whatsapp/whatsapp.sqlite",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "Advanced AWS/EKS/lab 3.1/access-key.md",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "Finale Project/cloudcart-capstone-starter/k8s/secrets/app-secrets.yaml",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "Finale Project/sports-store-deployments/apps/observability-secrets.yaml",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "argo-cd/.env",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "aws/DataBite AWS Deployment Lab/IITC-2026/DataBite/clone test/IITC-2026/Python/django_app/db.sqlite3",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "aws/DataBite AWS Deployment Lab/IITC-2026/DataBite/frontend/.env.production",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "aws/DataBite AWS Deployment Lab/IITC-2026/DataBite/frontend/IITC-2026/Python/django_app/db.sqlite3",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "aws/DataBite AWS Deployment Lab/IITC-2026/Python/django_app/db.sqlite3",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "aws/David Snir - Exercise- Build a 2-AZ VPC with Public, App, and Data Tiers/01.png",
+      "reason": "binary/media kept in drive archive, not uploaded"
+    },
+    {
+      "path": "aws/David Snir - Exercise- Build a 2-AZ VPC with Public, App, and Data Tiers/02.png",
+      "reason": "binary/media kept in drive archive, not uploaded"
+    },
+    {
+      "path": "aws/David Snir - Exercise- Build a 2-AZ VPC with Public, App, and Data Tiers/03.png",
+      "reason": "binary/media kept in drive archive, not uploaded"
+    },
+    {
+      "path": "aws/David Snir - Exercise- Build a 2-AZ VPC with Public, App, and Data Tiers/04.png",
+      "reason": "binary/media kept in drive archive, not uploaded"
+    },
+    {
+      "path": "aws/David Snir - Exercise- Build a 2-AZ VPC with Public, App, and Data Tiers/05.png",
+      "reason": "binary/media kept in drive archive, not uploaded"
+    },
+    {
+      "path": "aws/David Snir - Exercise- Build a 2-AZ VPC with Public, App, and Data Tiers/06.png",
+      "reason": "binary/media kept in drive archive, not uploaded"
+    },
+    {
+      "path": "aws/David Snir - Exercise- Build a 2-AZ VPC with Public, App, and Data Tiers/07.png",
+      "reason": "binary/media kept in drive archive, not uploaded"
+    },
+    {
+      "path": "fifa app/.env",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "fifa app/FifaApp-infra/k8s/backend/secret.yaml",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "github-actions/cicd-lab07-flow-matrix/cicd-lab07-flow-matrix.zip",
+      "reason": "binary/media kept in drive archive, not uploaded"
+    },
+    {
+      "path": "github-actions/cicd-lab07-flow-matrix/express-app.zip",
+      "reason": "binary/media kept in drive archive, not uploaded"
+    },
+    {
+      "path": "github-actions/cid-cd-day-1/cid-cd-day-1.zip",
+      "reason": "binary/media kept in drive archive, not uploaded"
+    },
+    {
+      "path": "github-actions/devops-course-practice-example-react-app/example-react-app.zip",
+      "reason": "binary/media kept in drive archive, not uploaded"
+    },
+    {
+      "path": "graphana/loki_student_terraform/terraform.tfstate",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "graphana/loki_student_terraform/terraform.tfstate.backup",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "helm/movie-api-lab/k8s/secret.yaml",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "helm/movie-api-lab/movie-chart/templates/secret.yaml",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "k8s/posgresql/.env",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "linux module/labs/lab.tar.gz",
+      "reason": "binary/media kept in drive archive, not uploaded"
+    },
+    {
+      "path": "linux module/labs/linux_lab6_permission_encounter/restricted/backup.tar.gz",
+      "reason": "binary/media kept in drive archive, not uploaded"
+    },
+    {
+      "path": "linux module/labs/linux_lab6_permission_encounter/restricted/secret_file.txt",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "linux module/labs/project_lab/images/ptojectimage.jpg",
+      "reason": "binary/media kept in drive archive, not uploaded"
+    },
+    {
+      "path": "passover_work/ATM-with_david/images/archive icon.png",
+      "reason": "binary/media kept in drive archive, not uploaded"
+    },
+    {
+      "path": "terraform/labs/series-2/terraform.tfstate",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "terraform/labs/series-2/terraform.tfstate.backup",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "terraform/labs/series-3/03-first-terraform-project/terraform.tfstate",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "terraform/labs/series-3/03-first-terraform-project/terraform.tfstate.backup",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "terraform/labs/series-3/04-backends/terraform.tfstate",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "terraform/labs/series-3/04-backends/terraform.tfstate.backup",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "terraform/labs/series-3/3.8/terraform.tfstate",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "terraform/labs/series-3/3.8/terraform.tfstate.backup",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "terraform/labs/series-5/terraform.tfstate",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "terraform/labs/series-5/terraform.tfstate.backup",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "terraform/labs/series-6/labs/terraform.tfstate",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "terraform/labs/series-6/labs/terraform.tfstate.backup",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "terraform/labs/series-6/labs/vpc/terraform.tfstate",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "terraform/labs/series-6/labs/vpc/terraform.tfstate.backup",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "terraform/labs/series-7/terraform.tfstate",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "terraform/labs/series-7/terraform.tfstate.backup",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "terraform/labs/tf cloud/oidc/terraform.tfstate",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "terraform/labs/tf cloud/oidc/terraform.tfstate.backup",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "terraform/terraform-self-practice/terraform.tfstate",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "terraform/terraform-self-practice/terraform.tfstate.backup",
+      "reason": "credential/database/state filename"
+    },
+    {
+      "path": "Finale Project/sports-store-infrastructure/tests/dep_203.tftest.hcl",
+      "reason": "secret scanner finding; original preserved only on drive"
+    },
+    {
+      "path": "jenkins/labs/06_blue_ocean/README.md",
+      "reason": "secret scanner finding; original preserved only on drive"
+    },
+    {
+      "path": "jenkins/labs/02_install_jenkins/README.md",
+      "reason": "secret scanner finding; original preserved only on drive"
+    },
+    {
+      "path": "k8s/labs/series-10/mongo-project/color-bd-creds.yml",
+      "reason": "secret scanner finding; original preserved only on drive"
+    },
+    {
+      "path": "k8s/labs/series-10/mongo-project/root-creds.yml",
+      "reason": "secret scanner finding; original preserved only on drive"
+    },
+    {
+      "path": "graphana/loki_student_terraform/terraform.tfvars",
+      "reason": "variable/identity configuration preserved in drive archive only"
+    }
+  ],
+  "created": "2026-10-26T14:09:04+02:00"
+}

@@ -1,0 +1,38 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "sports-store.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "sports-store.labels" . | nindent 4 }}
+  annotations:
+    {{- if .Values.ingress.annotations }}
+    {{- toYaml .Values.ingress.annotations | nindent 4 }}
+    {{- end }}
+    # Declarative Target Group forwarding actions for AWS ALB controller
+    {{- if eq .Values.ingress.className "alb" }}
+    alb.ingress.kubernetes.io/actions.catalog: '{"type":"forward","forwardConfig":{"targetGroups":[{"serviceName":"catalog","servicePort":8002,"weight":100}]}}'
+    alb.ingress.kubernetes.io/actions.order: '{"type":"forward","forwardConfig":{"targetGroups":[{"serviceName":"order","servicePort":8004,"weight":100}]}}'
+    {{- end }}
+spec:
+  ingressClassName: {{ .Values.ingress.className }}
+  rules:
+    - http:
+        paths:
+          {{- range $name, $svc := .Values.services }}
+          {{- if and $svc.ingressPath $svc.enabled (has $name $.Values.ingressServices) }}
+          - path: {{ $svc.ingressPath }}
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $name }}
+                port:
+                  {{- if and (eq $.Values.ingress.className "alb") (or (eq $name "catalog") (eq $name "order")) }}
+                  name: use-annotation
+                  {{- else }}
+                  number: {{ $svc.port }}
+                  {{- end }}
+          {{- end }}
+          {{- end }}
+{{- end }}

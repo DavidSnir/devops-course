@@ -1,0 +1,8 @@
+tfc_organization = "your-tfc-organization"
+tfc_project      = "your-tfc-project"
+tfc_workspace    = "your-tfc-workspace"
+
+# Replace this with least-privilege policies for real workloads.
+managed_policy_arns = [
+  "arn:aws:iam::aws:policy/AdministratorAccess"
+]

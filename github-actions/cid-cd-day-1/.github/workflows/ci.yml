@@ -1,0 +1,32 @@
+name: ci
+
+on:
+    push:
+        branches:
+            - main
+            - develop
+        paths:
+            - 'src/**'
+            - 'test/**'
+            - 'package*.json'
+            - '.github/workflows/ci.yml'
+
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - run: npm ci
+            - run: npm run lint
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - run: npm ci
+            - run: npm run lint
+    summary:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - run: npm ci
+            - run: npm run lint

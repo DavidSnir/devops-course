@@ -1,0 +1,1 @@
+- left right after copying jobs from https://github.com/IITC-College/DevOps-Materials/blob/main/microservices-ecs-deploy/steps/07-write-the-pipeline.md

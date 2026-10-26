@@ -1,0 +1,333 @@
+name: Deployment
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  AWS_REGION: us-east-1
+  APP_NAME: student-api
+  PARAM_MONGODB_URI: /student-api/mongodb/uri
+
+jobs:
+  lint:
+    name: Lint and Type Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Type check
+        run: npm run build
+
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    needs: lint
+
+    services:
+      mongodb:
+        image: mongo:7
+        ports:
+          - 27017:27017
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        env:
+          MONGODB_URI: mongodb://localhost:27017/student-api-test
+        run: npm test
+
+  build-and-push:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Docker image
+        run: |
+          docker build \
+            --build-arg COMMIT_SHA="${{ github.sha }}" \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/student-api:${{ github.sha }} \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/student-api:latest \
+            .
+
+      - name: Push Docker image
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/student-api:${{ github.sha }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/student-api:latest
+
+  deploy:
+    name: Deploy to AWS via SSM
+    runs-on: ubuntu-latest
+    needs: build-and-push
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Verify AWS identity
+        run: aws sts get-caller-identity
+
+      - name: Sync MongoDB URI to SSM Parameter Store
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+        run: |
+          aws ssm put-parameter \
+            --region "${{ env.AWS_REGION }}" \
+            --name "${{ env.PARAM_MONGODB_URI }}" \
+            --value "$MONGODB_URI" \
+            --type SecureString \
+            --overwrite
+
+      - name: Get ASG instance IDs
+        run: |
+          INSTANCE_IDS=$(aws autoscaling describe-auto-scaling-groups \
+            --region "${{ env.AWS_REGION }}" \
+            --auto-scaling-group-names "${{ secrets.ASG_NAME }}" \
+            --query "AutoScalingGroups[0].Instances[?LifecycleState=='InService'].InstanceId" \
+            --output text)
+
+          if [ -z "$INSTANCE_IDS" ]; then
+            echo "No InService instances found in ASG: ${{ secrets.ASG_NAME }}"
+            exit 1
+          fi
+
+          echo "Found instances: $INSTANCE_IDS"
+          echo "INSTANCE_IDS=$INSTANCE_IDS" >> $GITHUB_ENV
+
+      - name: Verify instances are managed by SSM
+        run: |
+          echo "Checking SSM managed instances..."
+
+          for INSTANCE_ID in $INSTANCE_IDS; do
+            PING_STATUS=$(aws ssm describe-instance-information \
+              --region "${{ env.AWS_REGION }}" \
+              --filters "Key=InstanceIds,Values=$INSTANCE_ID" \
+              --query "InstanceInformationList[0].PingStatus" \
+              --output text)
+
+            echo "Instance $INSTANCE_ID SSM status: $PING_STATUS"
+
+            if [ "$PING_STATUS" != "Online" ]; then
+              echo "Instance $INSTANCE_ID is not online in SSM"
+              echo "Check IAM Instance Profile, SSM Agent, and region."
+              exit 1
+            fi
+          done
+
+      - name: Create remote deploy script
+        run: |
+          cat > deploy-script.sh <<'SCRIPT'
+          #!/bin/bash
+          set -euo pipefail
+
+          REGION="us-east-1"
+          APP_NAME="student-api"
+          IMAGE_TO_DEPLOY="__IMAGE_TO_DEPLOY__"
+
+          echo "Starting deployment on $(hostname)"
+          echo "Image to deploy: $IMAGE_TO_DEPLOY"
+
+          echo "Waiting for AWS CLI..."
+          for i in $(seq 1 30); do
+            /usr/local/bin/aws --version >/dev/null 2>&1 && break
+            aws --version >/dev/null 2>&1 && break
+            echo "AWS CLI not ready yet: $i/30"
+            sleep 10
+          done
+
+          export PATH=$PATH:/usr/local/bin
+
+          echo "Waiting for Docker..."
+          for i in $(seq 1 30); do
+            docker info >/dev/null 2>&1 && break
+            echo "Docker not ready yet: $i/30"
+            sleep 10
+          done
+
+          DH_USER=$(aws ssm get-parameter \
+            --region "$REGION" \
+            --name /student-api/dockerhub/username \
+            --query Parameter.Value \
+            --output text)
+
+          DH_TOKEN=$(aws ssm get-parameter \
+            --region "$REGION" \
+            --name /student-api/dockerhub/token \
+            --with-decryption \
+            --query Parameter.Value \
+            --output text)
+
+          MONGO_URI=$(aws ssm get-parameter \
+            --region "$REGION" \
+            --name /student-api/mongodb/uri \
+            --with-decryption \
+            --query Parameter.Value \
+            --output text)
+
+          echo "$DH_TOKEN" | docker login --username "$DH_USER" --password-stdin
+
+          echo "Pulling image: $IMAGE_TO_DEPLOY"
+          docker pull "$IMAGE_TO_DEPLOY"
+
+          echo "Stopping old container if exists..."
+          docker rm -f "$APP_NAME" 2>/dev/null || true
+
+          echo "Starting new container..."
+          docker run -d \
+            --name "$APP_NAME" \
+            --restart unless-stopped \
+            -p 3000:3000 \
+            -e MONGODB_URI="$MONGO_URI" \
+            "$IMAGE_TO_DEPLOY"
+
+          echo "Waiting for app health..."
+          for i in $(seq 1 30); do
+            if curl -fsS http://localhost:3000/health >/dev/null; then
+              echo "Application is healthy"
+              docker ps
+              exit 0
+            fi
+
+            echo "App not healthy yet: $i/30"
+            sleep 5
+          done
+
+          echo "Application failed health check"
+          docker logs "$APP_NAME" || true
+          exit 1
+          SCRIPT
+
+          IMAGE="${{ secrets.DOCKERHUB_USERNAME }}/student-api:${{ github.sha }}"
+          sed -i "s#__IMAGE_TO_DEPLOY__#$IMAGE#g" deploy-script.sh
+
+      - name: Send deploy command through SSM
+        run: |
+          PARAMETERS=$(jq -n --rawfile script deploy-script.sh '{commands: [$script]}')
+
+          COMMAND_ID=$(aws ssm send-command \
+            --region "${{ env.AWS_REGION }}" \
+            --instance-ids $INSTANCE_IDS \
+            --document-name "AWS-RunShellScript" \
+            --comment "Deploy student-api from GitHub Actions" \
+            --parameters "$PARAMETERS" \
+            --query "Command.CommandId" \
+            --output text)
+
+          echo "COMMAND_ID=$COMMAND_ID" >> $GITHUB_ENV
+          echo "SSM command id: $COMMAND_ID"
+
+      - name: Wait for SSM command to finish
+        run: |
+          for INSTANCE_ID in $INSTANCE_IDS; do
+            echo "Waiting for command $COMMAND_ID on instance $INSTANCE_ID"
+
+            SUCCESS=false
+
+            for attempt in $(seq 1 60); do
+              STATUS=$(aws ssm get-command-invocation \
+                --region "${{ env.AWS_REGION }}" \
+                --command-id "$COMMAND_ID" \
+                --instance-id "$INSTANCE_ID" \
+                --query "Status" \
+                --output text 2>/dev/null || echo "Pending")
+
+              echo "Attempt $attempt/60 - Instance $INSTANCE_ID status: $STATUS"
+
+              if [ "$STATUS" = "Success" ]; then
+                echo "Deployment succeeded on $INSTANCE_ID"
+                SUCCESS=true
+                break
+              fi
+
+              if [ "$STATUS" = "Failed" ] || [ "$STATUS" = "Cancelled" ] || [ "$STATUS" = "TimedOut" ]; then
+                echo "Deployment failed on $INSTANCE_ID"
+
+                echo "Standard output:"
+                aws ssm get-command-invocation \
+                  --region "${{ env.AWS_REGION }}" \
+                  --command-id "$COMMAND_ID" \
+                  --instance-id "$INSTANCE_ID" \
+                  --query "StandardOutputContent" \
+                  --output text || true
+
+                echo "Standard error:"
+                aws ssm get-command-invocation \
+                  --region "${{ env.AWS_REGION }}" \
+                  --command-id "$COMMAND_ID" \
+                  --instance-id "$INSTANCE_ID" \
+                  --query "StandardErrorContent" \
+                  --output text || true
+
+                exit 1
+              fi
+
+              sleep 10
+            done
+
+            if [ "$SUCCESS" != "true" ]; then
+              echo "SSM command did not finish successfully in time for $INSTANCE_ID"
+              exit 1
+            fi
+          done
+
+      - name: Verify through ALB
+        run: |
+          echo "Checking ALB health endpoint..."
+
+          for i in $(seq 1 30); do
+            if curl -fsS "http://${{ secrets.ALB_DNS_NAME }}/health"; then
+              echo ""
+              echo "Healthy at: http://${{ secrets.ALB_DNS_NAME }}"
+              exit 0
+            fi
+
+            echo "ALB not healthy yet: $i/30"
+            sleep 10
+          done
+
+          echo "ALB health check failed"
+          exit 1
